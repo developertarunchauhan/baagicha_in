@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('handle')->unique();
             $table->string('email')->unique();
+            $table->unsignedBigInteger('role_id')->references('id')->on('roles')->restrictOnDelete();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
