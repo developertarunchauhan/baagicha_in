@@ -23,5 +23,21 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 /**
- * 
+ * Role Resource Controller
  */
+Route::resource('role', RoleController::class);
+
+/**
+ * User Resource Controller
+ */
+Route::resource('user', UserController::class);
+
+/**
+ * Category Resource Controller
+ */
+Route::resource('category', CategoryController::class);
+
+/**
+ * Blog Resource Controller
+ */
+Route::resource('blog', BlogController::class);
