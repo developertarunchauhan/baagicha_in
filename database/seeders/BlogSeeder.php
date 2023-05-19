@@ -17,7 +17,7 @@ class BlogSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 500; $i++) {
             $title = $faker->sentence($nbWords = 6, $variableNbWords = true);
             DB::table('blogs')->insert([
                 'title' => $title,

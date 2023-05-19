@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,24 +24,40 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 /**
- * Role Resource Controller
+ * Route Middleware
  */
-Route::resource('role', RoleController::class);
+Route::middleware(['auth'])->group(
+    function () {
 
-/**
- * User Resource Controller
- */
-Route::resource('user', UserController::class);
+        /**
+         * Admin Dashboard Controller
+         */
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-/**
- * Category Resource Controller
- */
-Route::resource('category', CategoryController::class);
+        /**
+         * Role Resource Controller
+         */
+        Route::resource('role', RoleController::class);
+        Route::group(['prefix' => 'role'], function () {
+            Route::get('/trashed/{action}', [RoleController::class, 'trashed'])->name('role.trashed');
+            Route::get('/restore/{role}', [RoleController::class, 'restore'])->withTrashed()->name('role.restore');
+            Route::delete('/forceDelete/{role}', [RoleController::class, 'forceDelete'])->withTrashed()->name('role.forceDelete');
+        });
 
-/**
- * Blog Resource Controller
- */
-Route::resource('blog', BlogController::class);
+        /**
+         * User Resource Controller
+         */
+        Route::resource('user', UserController::class);
+
+        /**
+         * Category Resource Controller
+         */
+        Route::resource('category', CategoryController::class);
+
+        /**
+         * Blog Resource Controller
+         */
+        Route::resource('blog', BlogController::class);
+    }
+);

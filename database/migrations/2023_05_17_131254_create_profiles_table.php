@@ -16,7 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('image');
             $table->string('banner');
+            $table->string('gender');
             $table->string('about');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
