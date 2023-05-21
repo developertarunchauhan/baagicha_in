@@ -41,7 +41,7 @@ class RoleController extends Controller
     {
         $validated = $request->validated();
         Role::create($validated);
-        return redirect(route('role.index'));
+        return redirect(route('role.index'))->with('_store', 'New Role Created');
     }
 
     /**
@@ -67,7 +67,7 @@ class RoleController extends Controller
     {
         $validated = $request->validated();
         $role->update($validated);
-        return redirect(route('role.index'));
+        return redirect(route('role.index'))->with('_update', 'Role Updated Successfully');
     }
 
     /**
@@ -76,7 +76,7 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect(route('role.index'));
+        return redirect(route('role.index'))->with('_destroy', 'Role Moved to Trash');
     }
 
     /**
@@ -85,7 +85,7 @@ class RoleController extends Controller
     public function forceDelete(Role $role)
     {
         $role->forceDelete();
-        return redirect(route('role.trashed', 'trashed'));
+        return redirect(route('role.trashed', 'trashed'))->with('_forceDelete', 'Role Deleted Permanently');
     }
 
 
@@ -95,6 +95,6 @@ class RoleController extends Controller
     public function restore(Role $role)
     {
         $role->restore();
-        return redirect(route('role.trashed', 'trashed'));
+        return redirect(route('role.trashed', 'trashed'))->with('_restore', 'Role Restored successfully');
     }
 }

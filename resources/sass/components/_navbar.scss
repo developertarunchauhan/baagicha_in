@@ -35,7 +35,8 @@ Setting up offcanvas for larger screen (bigger than 992px)
     }
 
     main {
-        margin-left: var(--offcanvas-width);
+        margin-left: var(--offcanvas-width) !important;
+        //width: 100% - var(--offcanvas-width) !important;
     }
 
     .sidebar-nav {

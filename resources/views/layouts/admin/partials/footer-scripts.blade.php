@@ -26,3 +26,13 @@
 </script>
 
 <!-- DataTables Scripts Ends-->
+
+<!-- Custom Alerts auto close begin-->
+
+<script>
+    $(".alert-dismissible").fadeTo(2000, 500).slideUp(500, function() {
+        $(".alert-dismissible").alert('close');
+    });
+</script>
+
+<!-- Custom alets auto close ends-->
