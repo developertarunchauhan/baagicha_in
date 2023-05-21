@@ -30,14 +30,14 @@
 <!-- Custom Alerts auto close begin-->
 
 <script>
-    $(".alert-dismissible").fadeTo(2500, 500).slideUp(500, function() {
+    $(".alert-dismissible").fadeTo(3500, 500).slideUp(500, function() {
         $(".alert-dismissible").alert('close');
     });
 
     setTimeout(function() {
         $(".alert-dismissible").removeClass('animate__bounceInRight');
         $(".alert-dismissible").addClass('animate__bounceOutRight');
-    }, 2000);
+    }, 3000);
 </script>
 
 <!-- Custom alets auto close ends-->
