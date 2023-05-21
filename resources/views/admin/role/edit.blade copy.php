@@ -25,10 +25,27 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <x-form.form :action="route('role.update',$role)" :edit="true">
-                    <x-form.title :value="$role->title" />
-                    <x-form.description :value="$role->description" />
-                </x-form.form>
+                <form action="{{route('role.update',$role)}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" aria-describedby="titleHelp" value="{{$role->title}}">
+                        @error('title')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Comments</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" style="height: 100px" id="description" name="description">{{$role->description}}</textarea>
+                        @error('description')
+                        <div class="invalid-feedback"> {{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="form-floating">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
             </div>
             <!-- /.card-body -->
         </div>
