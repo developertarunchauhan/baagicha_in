@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('tags');
             $table->string('meta_description');
             $table->string('seo_title');
+            $table->string('status')->default('Published');
             $table->unsignedBigInteger('user_id')->references('id')->on('users')->onDeleteRestrict();
             $table->softDeletes();
             $table->timestamps();

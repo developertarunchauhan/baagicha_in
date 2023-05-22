@@ -1,22 +1,19 @@
 <?php
 
-namespace App\View\Components\Table;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class TrashOption extends Component
+class Image extends Component
 {
     /**
      * Create a new component instance.
      */
-    public $model;
-    public $url;
-    public function __construct($model, $url)
+    public function __construct()
     {
-        $this->model = $model;
-        $this->url = $url;
+        //
     }
 
     /**
@@ -24,6 +21,6 @@ class TrashOption extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.table.trash-option');
+        return view('components.form.image');
     }
 }

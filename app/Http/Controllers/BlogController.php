@@ -17,6 +17,15 @@ class BlogController extends Controller
     }
 
     /**
+     * Display a listing of the trashed resource.
+     */
+    public function trashed()
+    {
+        $blogs = Blog::onlyTrashed()->get();
+        return view('admin.blog.trash', compact('blogs'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -61,6 +70,26 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return redirect(route('blog.index'))->with('_destory', 'Blog Moved to Trash');
+    }
+
+    /**
+     * Restores the specified resource from trash
+     */
+    public function restore(Blog $blog)
+    {
+        $blog->restore();
+        return redirect(route('blog.trashed', 'trashed'))->with('_restore', 'Blog Restored');
+    }
+
+    /**
+     * Permanently delete the resource from trash
+     */
+
+    public function forceDelete(Blog $blog)
+    {
+        $blog->forceDelete();
+        return redirect(route('blog.trash', 'trashed'))->with('_forceDelete', 'Blog Deleted permanently');
     }
 }

@@ -11,8 +11,14 @@ class Blog extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function setSlugAttribute()
+    public function setTitleAttribute($title)
     {
-        $this->attributes['slug'] = Str::slug($this->title, '-');
+        $this->attributes['title'] = ucfirst(strtolower($title));
+        $this->attributes['slug'] = Str::slug($title, '-');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

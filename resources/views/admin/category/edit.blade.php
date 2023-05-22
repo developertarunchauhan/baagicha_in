@@ -4,12 +4,13 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         <div class="card shadow">
-            <x-card.header title="All Roles" url="role" />
+            <x-card.header title="Edit Category" url="category" />
             <!-- /.card-header -->
             <div class="card-body">
-                <x-form.form :action="route('role.update',$role)" :edit="true">
-                    <x-form.title :value="$role->title" />
-                    <x-form.description :value="$role->description" />
+                <x-form.form :action="route('category.update',$category)" :edit="true">
+                    <x-form.title :value="$category->title" />
+                    <x-form.description :value="$category->description" />
+                    <x-form.image />
                 </x-form.form>
             </div>
             <!-- /.card-body -->

@@ -1,66 +1,43 @@
 @extends('layouts.admin.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-sm-11">
-            <div class="card shadow">
-                <div class="card-header d-flex flex-row align-items-center justify-content-between ">
-                    <h3 class="card-title">Roles</h3>
-                    <div class="btn-group">
-                        <button class="btn btn-primary btn-sm" type="button">
-                            Menu
-                        </button>
-                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="myTable" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($categories as $category)
-                            <tr>
-                                <td>{{$category->title}}</td>
-                                <td>{{$category->description}}</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-warning">Status</button>
-                                        <button type="button" class="btn btn-info">Edit</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Options</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- /.card-body -->
+<div class="row justify-content-center">
+    <div class="col-sm-10">
+        <div class="card shadow">
+            <x-card.header title="All Categories" url="category" />
+            <div class="card-body">
+                <table id="myTable" class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Details</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($categories as $category)
+                        <tr>
+                            <td>
+                                <img src="{{asset('/storage/images/'.$category->image)}}" alt="" srcset="" class="img-fluid">
+                            </td>
+                            <td style="width:50%">
+                                {{$category->title}}<br>
+                                <small>{{ Str::limit($category->description, 100)}}</small>
+                            </td>
+                            <td><x-table.options :model="$category" url="category" /></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Image</th>
+                            <th>Details</th>
+                            <th>Options</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
+            <!-- /.card-body -->
         </div>
     </div>
 </div>

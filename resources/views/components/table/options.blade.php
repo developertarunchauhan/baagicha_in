@@ -1,22 +1,21 @@
 <div>
-    <form action="{{route('role.destroy', $model)}}" method="POST">
+    <form action="{{route($url.'.destroy', $model)}}" method="POST">
         @csrf
         @method('DELETE')
         <div class="btn-group" role="group" aria-label="Basic example" style="width:100%">
-
-            @php $num = rand(0,1); @endphp
-            <button type="button" class="btn @if($num) btn-outline-success @else btn-outline-warning @endif btn-sm" data-bs-toggle="modal" data-bs-target="#status_{{$model->id}}">
-                @if($num) <i class="bi bi-toggle-on"></i> @else <i class="bi bi-toggle-off"></i> @endif {{$num}}
+            @if($model->status)
+            <button type="button" class="btn @if($model->status === 'Published') btn-outline-success @else btn-outline-warning @endif btn-sm" data-bs-toggle="modal" data-bs-target="#status_{{$model->id}}">
+                @if($model->status === 'Published') <i class="bi bi-toggle-on"></i> @else <i class="bi bi-toggle-off"></i> @endif
             </button>
-
+            @endif
             <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#edit_{{$model->id}}">
-                <i class="bi bi-pencil"></i> Edit
+                <i class="bi bi-pencil"></i>
             </button>
             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_{{$model->id}}">
-                <i class="bi bi-trash3-fill"></i> Trash
+                <i class="bi bi-trash3-fill"></i>
             </button>
         </div>
-
+        @if($model->status)
         <!-- Status Model Begin -->
         <div class="modal fade" id="status_{{$model->id}}" tabindex="-1" aria-labelledby="status_{{$model->id}}Label" aria-hidden="true">
             <div class="modal-dialog">
@@ -35,7 +34,7 @@
                 </div>
             </div>
         </div>
-
+        @endif
         <!-- Status Model Ends -->
         <!-- Delete Model Begin -->
         <div class="modal fade" id="delete_{{$model->id}}" tabindex="-1" aria-labelledby="delete_{{$model->id}}Label" aria-hidden="true">
@@ -69,7 +68,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">No</button>
-                        <a href="{{route('role.edit',$model)}}" class="btn btn-block btn-sm btn-outline-secondary">Edit</a>
+                        <a href="{{route($url.'.edit',$model)}}" class="btn btn-block btn-sm btn-outline-secondary">Edit</a>
                     </div>
                 </div>
             </div>

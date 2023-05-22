@@ -12,9 +12,11 @@ class Options extends Component
      * Create a new component instance.
      */
     public $model;
-    public function __construct($model)
+    public $url;
+    public function __construct($model, $url)
     {
         $this->model = $model;
+        $this->url = $url;
     }
 
     /**

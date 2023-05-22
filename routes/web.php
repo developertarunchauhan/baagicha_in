@@ -54,10 +54,20 @@ Route::middleware(['auth'])->group(
          * Category Resource Controller
          */
         Route::resource('category', CategoryController::class);
+        Route::group(['prefix' => 'category'], function () {
+            Route::get('/trashed/{action}', [CategoryController::class, 'trashed'])->name('category.trashed');
+            Route::get('/restore/{category}', [CategoryController::class, 'restore'])->withTrashed()->name('category.restore');
+            Route::delete('/forceDelete/{category}', [CategoryController::class, 'forceDelete'])->withTrashed()->name('category.forceDelete');
+        });
 
         /**
          * Blog Resource Controller
          */
         Route::resource('blog', BlogController::class);
+        Route::group(['prefix' => 'blog'], function () {
+            Route::get('/trashed/{action}', [BlogController::class, 'trashed'])->name('blog.trashed');
+            Route::get('/restore/{blog}', [BlogController::class, 'restore'])->withTrashed()->name('blog.restore');
+            Route::delete('/forceDelete/{blog}', [BlogController::class, 'forceDelete'])->withTrashed()->name('blog.forceDelete');
+        });
     }
 );
