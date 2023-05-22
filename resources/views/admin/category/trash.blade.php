@@ -4,7 +4,8 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         <div class="card shadow">
-            <x-card.header title="All Roles" url="role" />
+            <x-card.header title="Trashed Category" url="category" />
+            <!-- /.card-header -->
             <div class="card-body">
                 <table id="myTable" class="table table-hover table-sm">
                     <thead>
@@ -15,11 +16,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($roles as $role)
+                        @foreach($categories as $category)
                         <tr>
-                            <td>{{$role->title}}</td>
-                            <td>{{$role->description}}</td>
-                            <td><x-table.options :model="$role" url="role" /></td>
+                            <td>{{$category->title}}</td>
+                            <td>{{Str::limit($category->description,50)}}</td>
+                            <td>
+                                <x-table.trash-option :model="$category" url="category" />
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

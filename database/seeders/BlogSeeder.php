@@ -28,6 +28,7 @@ class BlogSeeder extends Seeder
                 'tags' => $faker->word,
                 'meta_description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
                 'seo_title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+                'status' => rand(0, 1) ? 'Published' : 'Draft',
                 'user_id' => rand(1, 10),
             ]);
         }

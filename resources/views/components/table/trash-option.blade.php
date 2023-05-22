@@ -1,13 +1,13 @@
 <div>
-    <form action="{{route('role.forceDelete', $model)}}" method="post">
+    <form action="{{route($url.'.forceDelete', $model)}}" method="post">
         @csrf
         @method('DELETE')
         <div class="btn-group" role="group" aria-label="Basic example" style="width:100%">
             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#restore_{{$model->id}}">
-                <i class="bi bi-recycle"></i> Restore
+                <i class="bi bi-recycle"></i>
             </button>
             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#destroy_{{$model->id}}">
-                <i class="bi bi-trash"></i> Destroy
+                <i class="bi bi-trash"></i>
             </button>
         </div>
         <!-- Force Delete Model Start-->
@@ -43,7 +43,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="{{route('role.restore',$model)}}" class="btn btn-outline-success">Restore</a>
+                        <a href="{{route($url.'.restore',$model)}}" class="btn btn-outline-success">Restore</a>
                     </div>
                 </div>
             </div>

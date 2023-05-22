@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         <div class="card shadow">
-            <x-card.header title="Trashed Role" add="{{route('role.create')}}" all="{{route('role.index')}}" trash="{{route('role.trashed','trashed')}}" />
+            <x-card.header title="All Roles" url="role" />
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="myTable" class="table table-hover table-sm">
@@ -21,7 +21,7 @@
                             <td>{{$role->title}}</td>
                             <td>{{$role->description}}</td>
                             <td>
-                                <x-table.trash-option :model="$role" />
+                                <x-table.trash-option :model="$role" url="role" />
                             </td>
                         </tr>
                         @endforeach

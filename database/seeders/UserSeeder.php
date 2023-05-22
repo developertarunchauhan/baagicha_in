@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
          * Common users / visitors
          */
         $faker = Faker::create();
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('users')->insert([
                 'name' => $faker->name . "-" . $i,
                 'handle' => $faker->word . "-" . $i,

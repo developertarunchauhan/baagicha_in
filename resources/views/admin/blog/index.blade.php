@@ -1,73 +1,39 @@
 @extends('layouts.admin.app')
 
 @section('content')
-<div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
-        </ol>
-    </nav>
-    <div class="row justify-content-center mt-5">
-        <div class="col-sm-12">
-            <div class="card shadow">
-                <div class="card-header d-flex flex-row align-items-center justify-content-between ">
-                    <h3 class="card-title">Roles</h3>
-                    <div class="btn-group">
-                        <button class="btn btn-primary btn-sm" type="button">
-                            Menu
-                        </button>
-                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="myTable" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($blogs as $blog)
-                            <tr>
-                                <td>{{$blog->title}}</td>
-                                <td>{{$blog->excrept}}</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-warning">Status</button>
-                                        <button type="button" class="btn btn-info">Edit</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Options</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- /.card-body -->
+<div class="row justify-content-center">
+    <div class="col-sm-10">
+        <div class="card shadow">
+            <x-card.header title="All Blog" url="blog" />
+            <div class="card-body">
+                <table id="myTable" class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Deails</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($blogs as $blog)
+                        <tr>
+                            <td style="width:80%">
+                                {{$blog->title}}<br>
+                                <a href="#" class="text-small text-reset">{{$blog->user->name}}</a><br>
+                                <small>{{$blog->excrept}}</small>
+                            </td>
+                            <td><x-table.options :model="$blog" url="blog" /></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Details</th>
+                            <th>Options</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
+            <!-- /.card-body -->
         </div>
     </div>
 </div>
