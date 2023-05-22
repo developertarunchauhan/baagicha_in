@@ -17,12 +17,32 @@
 <script>
     $(function() {
         $("#myTable").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": true,
-            "buttons": ["excel", "pdf", "print", "colvis"]
+            responsive: true,
+            lengthChange: false,
+            autoWidth: true,
+            dom: 'Bfrtip',
+            buttons: [
+                // "excel", "pdf", "print", "colvis"
+                {
+                    extend: 'pdf',
+                    className: 'btn-sm',
+                    titleAttr: "Export to PDF"
+                },
+                {
+                    extend: 'excel',
+                    className: 'btn-sm',
+                    titleAttr: "Export to Excel"
+                },
+                {
+                    extend: 'print',
+                    className: 'btn-sm',
+                    titleAttr: "Export to Print"
+                }
+            ]
         }).buttons().container().appendTo('#myTable_wrapper .col-md-6:eq(0)');
     });
+
+    $(".btn-html5").removeClass('btn-secondary');
 </script>
 
 <!-- DataTables Scripts Ends-->
