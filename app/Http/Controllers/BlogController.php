@@ -30,7 +30,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.blog.create');
     }
 
     /**
@@ -90,6 +90,6 @@ class BlogController extends Controller
     public function forceDelete(Blog $blog)
     {
         $blog->forceDelete();
-        return redirect(route('blog.trash', 'trashed'))->with('_forceDelete', 'Blog Deleted permanently');
+        return redirect(route('blog.trashed', 'trashed'))->with('_forceDelete', 'Blog Deleted permanently');
     }
 }

@@ -20,7 +20,7 @@
                             <td>
                                 <img src="{{asset('/storage/images/'.$category->image)}}" alt="" srcset="" class="img-fluid">
                             </td>
-                            <td style="width:50%">
+                            <td>
                                 {{$category->title}}<br>
                                 <small>{{ Str::limit($category->description, 100)}}</small>
                             </td>

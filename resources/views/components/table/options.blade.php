@@ -2,7 +2,7 @@
     <form action="{{route($url.'.destroy', $model)}}" method="POST">
         @csrf
         @method('DELETE')
-        <div class="btn-group" role="group" aria-label="Basic example" style="width:100%">
+        <div class="btn-group" role="group" aria-label="Basic example">
             @if($model->status)
             <button type="button" class="btn @if($model->status === 'Published') btn-outline-success @else btn-outline-warning @endif btn-sm" data-bs-toggle="modal" data-bs-target="#status_{{$model->id}}">
                 @if($model->status === 'Published') <i class="bi bi-toggle-on"></i> @else <i class="bi bi-toggle-off"></i> @endif

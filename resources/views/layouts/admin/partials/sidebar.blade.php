@@ -67,7 +67,7 @@
                                     </a>
                                     <a href="{{route('blog.index')}}" class="nav-link px-3  text-light">
                                         <span class="me-2">
-                                            <i class="bi bi-body-text"></i>
+                                            <i class="bi bi-list-columns"></i>
                                         </span>
                                         <span>Blogs</span>
                                     </a>
