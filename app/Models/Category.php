@@ -23,8 +23,10 @@ class Category extends Model
         $this->attributes['title'] = ucfirst(strtolower($title));
         $this->attributes['slug'] = Str::slug($title, '-');
     }
-    // public function getImageAttribute($value)
-    // {
-    //     return $value->image;
-    // }
+
+
+    public function blogs()
+    {
+        return $this->belongsToMany(Blog::class, 'blog_categories');
+    }
 }

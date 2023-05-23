@@ -16,6 +16,16 @@
                         </div>
                         <div class="col-lg-4 border-lg-start">
                             <x-form.select :options="['Published','Draft']" :selected="old('select')" />
+                            <div class="border p-2 rounded">
+                                @foreach($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$category->id}}" id="cat" name="cat[]">
+                                    <label class="form-check-label" for="cat">
+                                        {{$category->title}}
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>
                             <x-form.textarea title="meta_description" :value="old('meta_description')" />
                             <x-form.textarea title="seo_title" :value="old('seo_title')" />
                             <x-form.textarea title="tags" :value="old('tags')" />

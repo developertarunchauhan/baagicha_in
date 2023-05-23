@@ -23,6 +23,8 @@
                             <td>
                                 {{$blog->title}}<br>
                                 <small>
+                                    @foreach($blog->categories as $category)<a href="#" class="border rounded bg-secondary text-light px-1" style="font-size:.7rem"> {{$category->title}}</a> @endforeach
+                                    <br>
                                     <a href="#" class="text-reset text-muted">{{$blog->user->name}}</a> | {{ \Carbon\Carbon::parse($blog->created_at)->diffForHumans() }}
                                 </small><br>
                                 <small>{{$blog->excrept}}</small>

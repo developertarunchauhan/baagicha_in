@@ -22,7 +22,10 @@
                             </td>
                             <td>
                                 {{$category->title}}<br>
-                                <small>{{ Str::limit($category->description, 100)}}</small>
+                                <small>
+                                    ({{$category->blogs->count()}} Blogs)<br>
+                                    {{ Str::limit($category->description, 100)}}
+                                </small>
                             </td>
                             <td><x-table.options :model="$category" url="category" /></td>
                         </tr>

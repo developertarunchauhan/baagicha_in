@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as Image;
+use App\Models\Category;
 
 class BlogController extends Controller
 {
@@ -15,8 +16,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::with('user')->get();
-        //$blogs = Blog::all(); N+1 loading problem
+        $blogs = Blog::with(['user', 'categories'])->get();
+        //$blogs = Blog::all(); //N+1 loading problem
         return view('admin.blog.index', compact('blogs'));
     }
 
@@ -34,7 +35,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.create');
+        $categories = Category::all();
+        return view('admin.blog.create', compact('categories'));
     }
 
     /**
@@ -53,7 +55,8 @@ class BlogController extends Controller
         }
         $data['user_id'] = auth()->user()->id;
 
-        Blog::create($data);
+        $blog = Blog::create($data);
+        $blog->categories()->attach($data['cat']);
         return redirect(route('blog.index'))->with('_store', 'New Blog Saved');
     }
 
