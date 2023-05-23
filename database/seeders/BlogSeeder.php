@@ -24,7 +24,7 @@ class BlogSeeder extends Seeder
                 'slug' => Str::slug($title, '-'),
                 'excrept' => $faker->sentence($nbWords = 20, $variableNbWords = true),
                 'body' => $faker->text($maxNbChars = 200),
-                'image' => 'blog.jpg',
+                'image' => 'img_' . rand(1, 5) . '.jpg',
                 'tags' => $faker->word,
                 'meta_description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
                 'seo_title' => $faker->sentence($nbWords = 6, $variableNbWords = true),

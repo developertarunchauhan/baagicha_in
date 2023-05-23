@@ -11,6 +11,24 @@
                     <x-form.title :value="$category->title" />
                     <x-form.description :value="$category->description" />
                     <x-form.image />
+                    <div class="mb-3">
+                        <img src="{{asset('/storage/images/'.$category->image)}}" alt="" srcset="" class="img-fluid border" style="width:250px" id="img-preview">
+                    </div>
+                    <script>
+                        $(document).ready(() => {
+                            $("#image").change(function() {
+                                const file = this.files[0];
+                                if (file) {
+                                    let reader = new FileReader();
+                                    reader.onload = function(event) {
+                                        $("#img-preview")
+                                            .attr("src", event.target.result);
+                                    };
+                                    reader.readAsDataURL(file);
+                                }
+                            });
+                        });
+                    </script>
                 </x-form.form>
             </div>
             <!-- /.card-body -->

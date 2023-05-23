@@ -10,26 +10,29 @@
                 <table id="myTable" class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Details</th>
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($categories as $category)
                         <tr>
-                            <td>{{$category->title}}</td>
-                            <td>{{Str::limit($category->description,50)}}</td>
-                            <td>
-                                <x-table.trash-option :model="$category" url="category" />
+                            <td style="width:15%">
+                                <img src="{{asset('/storage/images/'.$category->image)}}" alt="" srcset="" class="img-fluid">
                             </td>
+                            <td>
+                                {{$category->title}}<br>
+                                <small>{{ Str::limit($category->description, 100)}}</small>
+                            </td>
+                            <td><x-table.trash-option :model="$category" url="category" /></td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Title</th>
-                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Details</th>
                             <th>Options</th>
                         </tr>
                     </tfoot>

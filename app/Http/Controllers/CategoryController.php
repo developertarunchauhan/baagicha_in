@@ -72,7 +72,17 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
+        //return $request;
         $data = $request->validated();
+        if ($request->file('image')->isValid()) {
+            //IMPROVE THIS CODE IN SECOND ITERATION
+            $old_image = $category->image;
+            Storage::delete('/public/images/' . $old_image); // Deleting old image
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $request->image->storeAs('public/images', $image_name);
+            $data['image'] = $image_name;
+        }
         $category->update($data);
         return redirect(route('category.index'))->with('_update', 'Category Updated');
     }

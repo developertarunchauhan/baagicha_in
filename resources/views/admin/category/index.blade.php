@@ -17,7 +17,7 @@
                     <tbody>
                         @foreach($categories as $category)
                         <tr>
-                            <td>
+                            <td style="width:15%">
                                 <img src="{{asset('/storage/images/'.$category->image)}}" alt="" srcset="" class="img-fluid">
                             </td>
                             <td>
