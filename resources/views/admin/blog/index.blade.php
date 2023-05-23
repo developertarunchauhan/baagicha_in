@@ -9,16 +9,22 @@
                 <table id="myTable" class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>Deails</th>
+                            <th>Image</th>
+                            <th>Details</th>
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($blogs as $blog)
                         <tr>
-                            <td style="width:80%">
+                            <td style="width:15%">
+                                <img src="{{asset('/storage/images/'.$blog->image)}}" alt="" srcset="" class="img-fluid">
+                            </td>
+                            <td>
                                 {{$blog->title}}<br>
-                                <a href="#" class="text-small text-reset">{{$blog->user->name}}</a><br>
+                                <small>
+                                    <a href="#" class="text-reset text-muted">{{$blog->user->name}}</a> | {{ \Carbon\Carbon::parse($blog->created_at)->diffForHumans() }}
+                                </small><br>
                                 <small>{{$blog->excrept}}</small>
                             </td>
                             <td><x-table.options :model="$blog" url="blog" /></td>
@@ -27,6 +33,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
+                            <th>Image</th>
                             <th>Details</th>
                             <th>Options</th>
                         </tr>

@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as Image;
 
 class CategoryController extends Controller
 {
@@ -44,7 +45,9 @@ class CategoryController extends Controller
         if ($request->file('image')->isValid()) {
             $image = $request->file('image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $request->image->storeAs('public/images', $image_name);
+            $destination_path = public_path('storage/images/' . $image_name);
+            Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
+            //$request->image->storeAs('public/images', $image_name);
             $data['image'] = $image_name;
         }
         Category::create($data);
@@ -80,7 +83,9 @@ class CategoryController extends Controller
             Storage::delete('/public/images/' . $old_image); // Deleting old image
             $image = $request->file('image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $request->image->storeAs('public/images', $image_name);
+            $destination_path = public_path('storage/images/' . $image_name);
+            Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
+            //$request->image->storeAs('public/images', $image_name);
             $data['image'] = $image_name;
         }
         $category->update($data);

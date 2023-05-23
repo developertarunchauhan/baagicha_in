@@ -2,14 +2,27 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-sm-10">
+    <div class="col-lg-12 col-xl-10">
         <div class="card shadow">
-            <x-card.header title="Edit Role" add="{{route('role.create')}}" all="{{route('role.index')}}" trash="{{route('role.trashed','trashed')}}" />
+            <x-card.header title="Add Blog" url="blog" />
             <!-- /.card-header -->
             <div class="card-body">
-                <x-form.form :action="route('role.update',$role)" :edit="true">
-                    <x-form.title :value="$role->title" />
-                    <x-form.description :value="$role->description" />
+                <x-form.form :action="route('blog.store')" edit="">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <x-form.title :value="old('title',$blog->title)" />
+                            <x-form.body :value="old('body',$blog->body)" />
+                            <x-form.textarea title="excrept" :value="old('excrept',$blog->excrept)" />
+                        </div>
+                        <div class="col-lg-4 border-lg-start">
+                            <x-form.select :options="['Published','Draft']" :selected="old('status',$blog->status)" />
+                            <x-form.textarea title="meta_description" :value="old('meta_description',$blog->meta_description)" />
+                            <x-form.textarea title="seo_title" :value="old('seo_title',$blog->seo_title)" />
+                            <x-form.textarea title="tags" :value="old('tags',$blog->tags)" />
+                            <x-form.image :image="false" />
+                        </div>
+                    </div>
+
                 </x-form.form>
             </div>
             <!-- /.card-body -->
@@ -17,3 +30,6 @@
     </div>
 </div>
 @endsection
+<!--
+                'slug' => Str::slug($title, '-'),
+-->

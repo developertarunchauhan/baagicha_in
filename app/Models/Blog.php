@@ -11,6 +11,19 @@ class Blog extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'excrept',
+        'body',
+        'image',
+        'tags',
+        'meta_description',
+        'seo_title',
+        'status',
+        'user_id'
+    ];
+
     public function setTitleAttribute($title)
     {
         $this->attributes['title'] = ucfirst(strtolower($title));

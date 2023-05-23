@@ -2,7 +2,7 @@
     <form action="{{route($url.'.forceDelete', $model)}}" method="post">
         @csrf
         @method('DELETE')
-        <div class="btn-group" role="group" aria-label="Basic example" style="width:100%">
+        <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#restore_{{$model->id}}">
                 <i class="bi bi-recycle"></i>
             </button>

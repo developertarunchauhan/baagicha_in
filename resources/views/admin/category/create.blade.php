@@ -10,7 +10,7 @@
                 <x-form.form :action="route('category.store')" edit="">
                     <x-form.title :value="old('title')" />
                     <x-form.description :value="old('description')" />
-                    <x-form.image />
+                    <x-form.image :image="false" />
                 </x-form.form>
             </div>
             <!-- /.card-body -->
