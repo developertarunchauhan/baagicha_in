@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use App\Http\Requests\BlogRequest;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as Image;
 
 class BlogController extends Controller
 {
@@ -12,7 +15,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::with('user')->get();
+        //$blogs = Blog::all(); N+1 loading problem
         return view('admin.blog.index', compact('blogs'));
     }
 
@@ -36,9 +40,21 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        //
+        $data = $request->validated();
+        if ($request->file('image')->isValid()) {
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $destination_path = public_path('storage/images/' . $image_name);
+            Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
+            //$request->image->storeAs('public/images', $image_name);
+            $data['image'] = $image_name;
+        }
+        $data['user_id'] = auth()->user()->id;
+
+        Blog::create($data);
+        return redirect(route('blog.index'))->with('_store', 'New Blog Saved');
     }
 
     /**
@@ -54,7 +70,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        return view('admin.blog.edit', compact('blog'));
     }
 
     /**

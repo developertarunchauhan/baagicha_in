@@ -6,15 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Image extends Component
+class Textarea extends Component
 {
     /**
      * Create a new component instance.
      */
-    public $image;
-    public function __construct($image)
+    public $title;
+    public $value;
+    public function __construct($title, $value)
     {
-        $this->image = $image;
+        $this->title = $title;
+        $this->value = $value;
     }
 
     /**
@@ -22,6 +24,6 @@ class Image extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.form.image');
+        return view('components.form.textarea');
     }
 }

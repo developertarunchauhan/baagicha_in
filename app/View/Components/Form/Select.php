@@ -6,15 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Image extends Component
+class Select extends Component
 {
     /**
      * Create a new component instance.
      */
-    public $image;
-    public function __construct($image)
+    public $options;
+    public $selected;
+    public function __construct($options, $selected)
     {
-        $this->image = $image;
+        $this->options = $options;
+        $this->selected = $selected;
     }
 
     /**
@@ -22,6 +24,6 @@ class Image extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.form.image');
+        return view('components.form.select');
     }
 }

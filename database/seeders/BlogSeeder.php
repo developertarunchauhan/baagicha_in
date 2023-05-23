@@ -30,6 +30,7 @@ class BlogSeeder extends Seeder
                 'seo_title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
                 'status' => rand(0, 1) ? 'Published' : 'Draft',
                 'user_id' => rand(1, 10),
+                'created_at' => now()
             ]);
         }
     }
