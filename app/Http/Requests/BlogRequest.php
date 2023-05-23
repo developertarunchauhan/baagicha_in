@@ -30,6 +30,7 @@ class BlogRequest extends FormRequest
             'meta_description' => 'required|max:255',
             'seo_title' => 'required|max:255',
             'status' => 'required',
+            'cat' => 'required',
         ];
     }
 }

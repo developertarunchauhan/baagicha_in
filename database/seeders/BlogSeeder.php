@@ -17,9 +17,11 @@ class BlogSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+        $cats = \App\Models\Category::all()->count();
+
         for ($i = 0; $i < 500; $i++) {
             $title = $faker->sentence($nbWords = 6, $variableNbWords = true);
-            DB::table('blogs')->insert([
+            $blog = \App\Models\Blog::create([
                 'title' => $title,
                 'slug' => Str::slug($title, '-'),
                 'excrept' => $faker->sentence($nbWords = 20, $variableNbWords = true),
@@ -32,6 +34,8 @@ class BlogSeeder extends Seeder
                 'user_id' => rand(1, 10),
                 'created_at' => now()
             ]);
+            $cat_array = [rand(1, 3), rand(4, 5), rand(6, 7)];
+            $blog->categories()->attach($cat_array);
         }
     }
 }
