@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +62,17 @@ Route::middleware(['auth'])->group(
         });
 
         /**
+         * Subcategory Resource Controller
+         */
+        Route::resource('subcategory', SubcategoryController::class);
+        Route::group(['prefix' => 'subcategory'], function () {
+            Route::get('/trashed/{action}', [SubcategoryController::class, 'trashed'])->name('subcategory.trashed');
+            Route::get('/restore/{subcategory}', [SubcategoryController::class, 'restore'])->withTrashed()->name('subcategory.restore');
+            Route::delete('/forceDelete/{subcategory}', [SubcategoryController::class, 'forceDelete'])->withTrashed()->name('subcategory.forceDelete');
+        });
+
+
+        /**
          * Blog Resource Controller
          */
         Route::resource('blog', BlogController::class);
@@ -67,6 +80,16 @@ Route::middleware(['auth'])->group(
             Route::get('/trashed/{action}', [BlogController::class, 'trashed'])->name('blog.trashed');
             Route::get('/restore/{blog}', [BlogController::class, 'restore'])->withTrashed()->name('blog.restore');
             Route::delete('/forceDelete/{blog}', [BlogController::class, 'forceDelete'])->withTrashed()->name('blog.forceDelete');
+        });
+
+        /**
+         * Product Resource Controller
+         */
+        Route::resource('product', ProductController::class);
+        Route::group(['prefix' => 'product'], function () {
+            Route::get('/trashed/{action}', [ProductController::class, 'trashed'])->name('product.trashed');
+            Route::get('/restore/{product}', [ProductController::class, 'restore'])->withTrashed()->name('product.restore');
+            Route::delete('/forceDelete/{product}', [ProductController::class, 'forceDelete'])->withTrashed()->name('product.forceDelete');
         });
     }
 );

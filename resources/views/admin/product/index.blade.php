@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         <div class="card shadow">
-            <x-card.header title="All Categories" url="category" />
+            <x-card.header title="All Products" url="product" />
             <div class="card-body">
                 <table id="myTable" class="table table-hover table-sm">
                     <thead>
@@ -15,19 +15,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($categories as $category)
+                        @foreach($products as $product)
                         <tr>
                             <td style="width:15%">
-                                <img src="{{asset('/storage/images/'.$category->image)}}" alt="" srcset="" class="img-fluid">
+                                <img src="{{asset('/storage/images/'.$product->image)}}" alt="" srcset="" class="img-fluid">
                             </td>
                             <td>
-                                {{$category->title}}<br>
+                                {{$product->title}}<br>
                                 <small>
-                                    ({{$category->blogs->count()}} Blogs) / ({{$category->subcategories->count()}} Subcategories)<br>
-                                    {{ Str::limit($category->description, 100)}}
+                                    Category : {{$product->category->title}} <br> Subcategory : {{$product->subcategory->title}}</a>
                                 </small>
+                                <small>{{$product->excrept}}</small>
                             </td>
-                            <td><x-table.options :model="$category" url="category" /></td>
+                            <td><x-table.options :model="$product" url="product" /></td>
                         </tr>
                         @endforeach
                     </tbody>
