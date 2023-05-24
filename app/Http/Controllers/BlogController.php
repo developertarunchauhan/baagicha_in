@@ -73,15 +73,18 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('admin.blog.edit', compact('blog'));
+        $categories = Category::all();
+        return view('admin.blog.edit', compact('blog', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(BlogRequest $request, Blog $blog)
     {
-        //
+        $data = $request->validated();
+
+        return $data;
     }
 
     /**
@@ -108,7 +111,10 @@ class BlogController extends Controller
 
     public function forceDelete(Blog $blog)
     {
-        $blog->forceDelete();
+        $image_path = '/public/images/' . $blog->image;
+        if ($blog->forceDelete()) {
+            Storage::delete($image_path);
+        }
         return redirect(route('blog.trashed', 'trashed'))->with('_forceDelete', 'Blog Deleted permanently');
     }
 }

@@ -39,4 +39,11 @@ class Blog extends Model
     {
         return $this->belongsToMany(Category::class, 'blog_categories');
     }
+    /**
+     * Using slug instead of id to access the resource
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
