@@ -24,6 +24,7 @@
                     </div>
                 </li>
                 <li>
+                    <!-- Access Manager Begin-->
                     <a class="nav-link sidebar-link px-3 text-light" data-bs-toggle="collapse" href="#accesscontrol" role="button" aria-expanded="false" aria-controls="accesscontrol">
                         <span class="me-2 fs-4"><i class="bi bi-sliders"></i></span>
                         <span>Access Manager</span>
@@ -50,6 +51,8 @@
                             </ul>
                         </div>
                     </div>
+                    <!-- Access Manager Ends-->
+                    <!-- Blog Manager Begin-->
                     <a class="nav-link sidebar-link text-light px-3" data-bs-toggle="collapse" href="#postmanager" role="button" aria-expanded="false" aria-controls="postmanager">
                         <span class="me-2 fs-3"><i class="bi bi-blockquote-left"></i></span>
                         <span>Blog Manager</span>
@@ -75,6 +78,41 @@
                             </ul>
                         </div>
                     </div>
+                    <!-- Blog Manager Ends-->
+                    <!-- eCommerce Manager Begin-->
+                    <a class="nav-link sidebar-link px-3 text-light" data-bs-toggle="collapse" href="#ecommercemanager" role="button" aria-expanded="false" aria-controls="ecommercemanager">
+                        <span class="me-2 fs-4"><i class="bi bi-sliders"></i></span>
+                        <span>eCommerce Manager</span>
+                        <span class="right-icon ms-auto"><i class="bi bi-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse" id="ecommercemanager">
+                        <div class="bg-primary">
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a href="{{route('role.index')}}" class="nav-link px-3 text-light">
+                                        <span class="me-2">
+                                            <i class="bi bi-tag"></i>
+                                        </span>
+                                        <span>Category</span>
+                                    </a>
+                                    <a href="{{route('role.index')}}" class="nav-link px-3 text-light">
+                                        <span class="me-2">
+                                            <i class="bi bi-tags"></i>
+                                        </span>
+                                        <span>Subcategory</span>
+                                    </a>
+                                    <a href="{{route('user.index')}}" class="nav-link px-3 text-light">
+                                        <span class="me-2">
+                                            <i class="bi bi-diagram-2"></i>
+                                        </span>
+                                        <span>Products</span>
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- eCommerce Manager Ends-->
                 </li>
             </ul>
         </nav>
