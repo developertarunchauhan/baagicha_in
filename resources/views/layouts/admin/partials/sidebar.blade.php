@@ -81,7 +81,7 @@
                     <!-- Blog Manager Ends-->
                     <!-- eCommerce Manager Begin-->
                     <a class="nav-link sidebar-link px-3 text-light" data-bs-toggle="collapse" href="#ecommercemanager" role="button" aria-expanded="false" aria-controls="ecommercemanager">
-                        <span class="me-2 fs-4"><i class="bi bi-sliders"></i></span>
+                        <span class="me-2 fs-4"><i class="bi bi-cart"></i></span>
                         <span>eCommerce Manager</span>
                         <span class="right-icon ms-auto"><i class="bi bi-chevron-down"></i></span>
                     </a>
@@ -89,19 +89,13 @@
                         <div class="bg-primary">
                             <ul class="navbar-nav ps-3">
                                 <li>
-                                    <a href="{{route('role.index')}}" class="nav-link px-3 text-light">
-                                        <span class="me-2">
-                                            <i class="bi bi-tag"></i>
-                                        </span>
-                                        <span>Category</span>
-                                    </a>
-                                    <a href="{{route('role.index')}}" class="nav-link px-3 text-light">
+                                    <a href="{{route('subcategory.index')}}" class="nav-link px-3 text-light">
                                         <span class="me-2">
                                             <i class="bi bi-tags"></i>
                                         </span>
                                         <span>Subcategory</span>
                                     </a>
-                                    <a href="{{route('user.index')}}" class="nav-link px-3 text-light">
+                                    <a href="{{route('product.index')}}" class="nav-link px-3 text-light">
                                         <span class="me-2">
                                             <i class="bi bi-diagram-2"></i>
                                         </span>

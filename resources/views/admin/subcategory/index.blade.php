@@ -15,19 +15,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($categories as $category)
+                        @foreach($subcategories as $subcategory)
                         <tr>
                             <td style="width:15%">
-                                <img src="{{asset('/storage/images/'.$category->image)}}" alt="" srcset="" class="img-fluid">
+                                <img src="{{asset('/storage/images/'.$subcategory->image)}}" alt="" srcset="" class="img-fluid">
                             </td>
                             <td>
-                                {{$category->title}}<br>
+                                {{$subcategory->title}}<br>
                                 <small>
-                                    ({{$category->blogs->count()}} Blogs) / ({{$category->subcategories->count()}} Subcategories)<br>
-                                    {{ Str::limit($category->description, 100)}}
+                                    {{$subcategory->categories->count()}}
+                                    {{ Str::limit($subcategory->description, 100)}}
                                 </small>
                             </td>
-                            <td><x-table.options :model="$category" url="category" /></td>
+                            <td><x-table.options :model="$subcategory" url="subcategory" /></td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -30,15 +30,28 @@ class Blog extends Model
         $this->attributes['slug'] = Str::slug($title, '-');
     }
 
+    /**
+     * Eloquent Relationships
+     */
+
+    /**
+     * Blog - User Belongs to Relationsship
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
+    /**
+     * Blog - Category Many to Many Relationship
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'blog_categories');
     }
+
+
+
+
     /**
      * Using slug instead of id to access the resource
      */

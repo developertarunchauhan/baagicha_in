@@ -24,9 +24,40 @@ class Category extends Model
         $this->attributes['slug'] = Str::slug($title, '-');
     }
 
+    /**
+     * Eloquent Relationships
+     */
+
+    /**
+     * Category - Blog Many to Many Relationship
+     */
 
     public function blogs()
     {
         return $this->belongsToMany(Blog::class, 'blog_categories');
+    }
+
+    /**
+     * Category - Subcategory Many to Many Relationship
+     */
+    public function subcategories()
+    {
+        return $this->belongsToMany(Subcategory::class, 'category_subcategories');
+    }
+
+    /**
+     * Category hasMany Products
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Using slug instead of ID to access the category
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

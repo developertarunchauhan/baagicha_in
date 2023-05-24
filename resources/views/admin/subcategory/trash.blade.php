@@ -4,7 +4,8 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         <div class="card shadow">
-            <x-card.header title="All Categories" url="category" />
+            <x-card.header title="Trashed Category" url="category" />
+            <!-- /.card-header -->
             <div class="card-body">
                 <table id="myTable" class="table table-hover table-sm">
                     <thead>
@@ -22,12 +23,9 @@
                             </td>
                             <td>
                                 {{$category->title}}<br>
-                                <small>
-                                    ({{$category->blogs->count()}} Blogs) / ({{$category->subcategories->count()}} Subcategories)<br>
-                                    {{ Str::limit($category->description, 100)}}
-                                </small>
+                                <small>{{ Str::limit($category->description, 100)}}</small>
                             </td>
-                            <td><x-table.options :model="$category" url="category" /></td>
+                            <td><x-table.trash-option :model="$category" url="category" /></td>
                         </tr>
                         @endforeach
                     </tbody>
