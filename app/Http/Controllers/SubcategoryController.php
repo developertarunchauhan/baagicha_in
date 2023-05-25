@@ -6,6 +6,7 @@ use App\Models\Subcategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\SubcategoryRequest;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as Image;
 
 class SubcategoryController extends Controller
@@ -104,7 +105,13 @@ class SubcategoryController extends Controller
      */
     public function forceDelete(Subcategory $subcategory)
     {
-        $subcategory->delete();
+        $image_path = '/public/images/' . $subcategory->image;
+        $categories = $subcategory->categories;
+        if ($subcategory->forceDelete()) {
+            Storage::delete($image_path);
+            $subcategory->categories()->detach($categories);
+        }
+
         return redirect(route('subcategory.index'))->with('_destroy', 'Subcategory Moved to Trash');
     }
 }
