@@ -42,6 +42,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request, Category $category)
     {
         $data = $request->validated();
+        //return $data;
         if ($request->file('image')->isValid()) {
             $image = $request->file('image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
@@ -50,6 +51,7 @@ class CategoryController extends Controller
             //$request->image->storeAs('public/images', $image_name);
             $data['image'] = $image_name;
         }
+        //return gettype($data);
         Category::create($data);
         return redirect(route('category.index'))->with('_store', 'New Category Created');
     }

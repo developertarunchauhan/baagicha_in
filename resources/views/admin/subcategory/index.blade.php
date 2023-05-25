@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         <div class="card shadow">
-            <x-card.header title="All Categories" url="category" />
+            <x-card.header title="All Subcategories" url="subcategory" />
             <div class="card-body">
                 <table id="myTable" class="table table-hover table-sm">
                     <thead>

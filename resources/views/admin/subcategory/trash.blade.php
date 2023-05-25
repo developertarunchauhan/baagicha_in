@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         <div class="card shadow">
-            <x-card.header title="Trashed Category" url="category" />
+            <x-card.header title="Trashed Subcategory" url="subcategory" />
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="myTable" class="table table-hover table-sm">
@@ -16,16 +16,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($categories as $category)
+                        @foreach($subcategories as $subcategory)
                         <tr>
                             <td style="width:15%">
-                                <img src="{{asset('/storage/images/'.$category->image)}}" alt="" srcset="" class="img-fluid">
+                                <img src="{{asset('/storage/images/'.$subcategory->image)}}" alt="" srcset="" class="img-fluid">
                             </td>
                             <td>
-                                {{$category->title}}<br>
-                                <small>{{ Str::limit($category->description, 100)}}</small>
+                                {{$subcategory->title}}<br>
+                                <small>{{ Str::limit($subcategory->description, 100)}}</small>
                             </td>
-                            <td><x-table.trash-option :model="$category" url="category" /></td>
+                            <td><x-table.trash-option :model="$subcategory" url="subcategory" /></td>
                         </tr>
                         @endforeach
                     </tbody>
