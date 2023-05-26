@@ -11,15 +11,19 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <x-form.title :value="old('title')" />
-                            <x-form.body :value="old('body')" />
-                            <x-form.textarea title="excrept" :value="old('excrept')" />
+                            <x-form.description :value="old('description')" />
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Price</label>
+                                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="price" aria-describedby="titleHelp" value="{{old('price')}}" required>
+                                @error('price')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="col-lg-4 border-lg-start">
-                            <x-form.select :options="['Published','Draft']" :selected="old('select')" />
+                            <x-form.select :options=" ['In Stocks', 'Out Of Stock', 'Not Available', 'Available Soon']" :selected="old('select')" />
                             <x-form.checkbox :list="$categories" />
-                            <x-form.textarea title="meta_description" :value="old('meta_description')" />
-                            <x-form.textarea title="seo_title" :value="old('seo_title')" />
-                            <x-form.textarea title="tags" :value="old('tags')" />
+                            <x-form.checkbox :list="$subcategories" />
                             <x-form.image :image="false" />
                         </div>
                     </div>

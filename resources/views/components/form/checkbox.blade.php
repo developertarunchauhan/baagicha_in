@@ -1,4 +1,4 @@
-<div class="border p-2 rounded">
+<div class="border p-2 rounded mb-3">
     @foreach($list as $data)
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="{{$data->id}}" id="cat" name="cat[]">
