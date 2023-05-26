@@ -19,8 +19,6 @@ return new class extends Migration
             $table->float('price');
             $table->string('image');
             $table->enum('status', ['In Stocks', 'Out Of Stock', 'Not Available', 'Available Soon']);
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->foreignId('subcategory_id')->constrained('subcategories')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
