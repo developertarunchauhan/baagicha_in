@@ -47,7 +47,7 @@ class Role extends Model
 
 
     /**
-     * GETTER
+     * GETTER : Background colors based on role
      */
 
     public function getRoleColorAttribute()

@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(
         /**
          * Role Resource Controller
          */
-        Route::resource('role', RoleController::class);
+        Route::resource('role', RoleController::class)->middleware('roleUserAccess');
         Route::group(['prefix' => 'role'], function () {
             Route::get('/trashed/{action}', [RoleController::class, 'trashed'])->name('role.trashed');
             Route::get('/restore/{role}', [RoleController::class, 'restore'])->withTrashed()->name('role.restore');
