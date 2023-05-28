@@ -23,6 +23,14 @@ class Role extends Model
     ];
 
     /**
+     * Eloquent Relationship 
+     */
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+    /**
      * Creating mutating title & creating slug from title
      */
 
@@ -37,6 +45,27 @@ class Role extends Model
         $this->attributes['description'] = ucfirst(strtolower($description));
     }
 
+
+    /**
+     * GETTER
+     */
+
+    public function getRoleColorAttribute()
+    {
+        $color = [
+            1 => 'bg-primary',
+            2 => 'bg-secondary',
+            3 => 'bg-success',
+            4 => 'bg-danger',
+            5 => 'bg-warning',
+            6 => 'bg-info',
+            7 => 'bg-secondary',
+            8 => 'bg-dark',
+            9 => 'bg-warning',
+            10 => 'bg-info'
+        ];
+        return $color[$this->id];
+    }
     /**
      * Using `slug` instead `id` to retrieve data
      */

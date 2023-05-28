@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['category', 'subcategory'])->get();
+        $products = Product::with(['categories', 'subcategories'])->get();
         return view('admin.product.index', compact('products'));
     }
 

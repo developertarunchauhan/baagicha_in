@@ -42,16 +42,13 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request, Category $category)
     {
         $data = $request->validated();
-        //return $data;
         if ($request->file('image')->isValid()) {
             $image = $request->file('image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $destination_path = public_path('storage/images/' . $image_name);
             Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
-            //$request->image->storeAs('public/images', $image_name);
             $data['image'] = $image_name;
         }
-        //return gettype($data);
         Category::create($data);
         return redirect(route('category.index'))->with('_store', 'New Category Created');
     }
@@ -77,7 +74,6 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        //return $request;
         $data = $request->validated();
         if ($request->file('image')->isValid()) {
             //IMPROVE THIS CODE IN SECOND ITERATION
@@ -87,7 +83,6 @@ class CategoryController extends Controller
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $destination_path = public_path('storage/images/' . $image_name);
             Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
-            //$request->image->storeAs('public/images', $image_name);
             $data['image'] = $image_name;
         }
         $category->update($data);
@@ -117,8 +112,6 @@ class CategoryController extends Controller
      */
     public function forceDelete(Category $category)
     {
-        //return Storage::allFiles('/public/images/');
-        //dd('/public/images' . $category->image);
         Storage::delete('/public/images/' . $category->image);
         $category->forceDelete();
         return redirect(route('category.trashed', 'trashed'))->with('_forceDelete', 'Category Deleted Permanently');

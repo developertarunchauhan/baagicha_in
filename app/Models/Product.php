@@ -15,13 +15,13 @@ class Product extends Model
      * Eloquent Relationship
      */
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'category_products');
     }
 
-    public function subcategory()
+    public function subcategories()
     {
-        return $this->belongsTo(Subcategory::class);
+        return $this->belongsToMany(Subcategory::class, 'product_subcategories');
     }
 }

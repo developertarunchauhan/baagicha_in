@@ -23,7 +23,9 @@
                             <td>
                                 {{$subcategory->title}}<br>
                                 <small>
-                                    @foreach($subcategory->categories as $category) <a href="" class="text-reset bg-info rounded px-2">{{$category->title}}</a>@endforeach <br>
+                                    @foreach($subcategory->categories as $category)
+                                    <a href="" class="text-reset bg-info rounded px-2">{{$category->title}}</a>
+                                    @endforeach <br>
                                     {{ Str::limit($subcategory->description, 100)}}
                                 </small>
                             </td>

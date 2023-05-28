@@ -23,9 +23,18 @@
                             <td>
                                 {{$product->title}}<br>
                                 <small>
-                                    Category : {{$product->category->title}} <br> Subcategory : {{$product->subcategory->title}}</a>
-                                </small>
-                                <small>{{$product->excrept}}</small>
+                                    Categories :
+                                    @foreach($product->categories as $category)
+                                    <a href="#" class="text-reset">{{$category->title}}</a>
+                                    @endforeach
+                                </small><br>
+                                <small>
+                                    Subcategories :
+                                    @foreach($product->subcategories as $subcategory)
+                                    <a href="#" class="text-reset">{{$subcategory->title}}</a>
+                                    @endforeach
+                                </small><br>
+                                <small>{{$product->description}}</small>
                             </td>
                             <td><x-table.options :model="$product" url="product" /></td>
                         </tr>

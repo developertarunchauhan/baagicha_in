@@ -38,8 +38,11 @@
                         <tbody>
                             @foreach($users as $user)
                             <tr>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
+                                <td>{{$user->name}} <br>
+                                    <small>{{"@".$user->handle}}</small> <br>
+                                    <small class="rounded border px-2 py-1 text-light {{$user->role->role_color}}">{{$user->role->title}}</small>
+                                </td>
+                                <td>Email : {{$user->email}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-warning">Status</button>
