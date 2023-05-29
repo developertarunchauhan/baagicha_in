@@ -1,0 +1,19 @@
+.btn-green {
+    background-color: $bg-green;
+    color: $white;
+
+    &:hover {
+        background-color: $bg-green-dark;
+        color: $white;
+    }
+}
+
+.btn-outline-green {
+    border-color: $bg-green;
+    background: $white;
+
+    &:hover {
+        background-color: $bg-green-dark;
+        color: $white;
+    }
+}

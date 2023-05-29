@@ -21,7 +21,14 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+/**
+ * Front End Controller
+ */
+
 Route::get('/', [FrontController::class, 'index'])->name('home.index');
+Route::get('/blog/all', [FrontController::class, 'blog'])->name('home.blog');
+Route::get('/shop', [FrontController::class, 'shop'])->name('home.shop');
+Route::get('/about', [FrontController::class, 'about'])->name('home.about');
 
 Auth::routes();
 
