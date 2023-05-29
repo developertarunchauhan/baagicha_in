@@ -39,12 +39,12 @@ Route::middleware(['auth'])->group(
         /**
          * Role Resource Controller
          */
-        Route::resource('role', RoleController::class)->middleware('roleUserAccess');
+        Route::resource('role', RoleController::class)->middleware('RoleUserAccess');
         Route::group(['prefix' => 'role'], function () {
             Route::get('/trashed/{action}', [RoleController::class, 'trashed'])->name('role.trashed');
             Route::get('/restore/{role}', [RoleController::class, 'restore'])->withTrashed()->name('role.restore');
             Route::delete('/forceDelete/{role}', [RoleController::class, 'forceDelete'])->withTrashed()->name('role.forceDelete');
-        });
+        })->middleware('RoleUserAccess');
 
         /**
          * User Resource Controller
@@ -54,12 +54,12 @@ Route::middleware(['auth'])->group(
         /**
          * Category Resource Controller
          */
-        Route::resource('category', CategoryController::class);
+        Route::resource('category', CategoryController::class)->middleware('CategoryAccess');
         Route::group(['prefix' => 'category'], function () {
             Route::get('/trashed/{action}', [CategoryController::class, 'trashed'])->name('category.trashed');
             Route::get('/restore/{category}', [CategoryController::class, 'restore'])->withTrashed()->name('category.restore');
             Route::delete('/forceDelete/{category}', [CategoryController::class, 'forceDelete'])->withTrashed()->name('category.forceDelete');
-        });
+        })->middleware('CategoryAccess');
 
         /**
          * Subcategory Resource Controller
@@ -75,12 +75,12 @@ Route::middleware(['auth'])->group(
         /**
          * Blog Resource Controller
          */
-        Route::resource('blog', BlogController::class);
+        Route::resource('blog', BlogController::class)->middleware('BlogAccess');
         Route::group(['prefix' => 'blog'], function () {
             Route::get('/trashed/{action}', [BlogController::class, 'trashed'])->name('blog.trashed');
             Route::get('/restore/{blog}', [BlogController::class, 'restore'])->withTrashed()->name('blog.restore');
             Route::delete('/forceDelete/{blog}', [BlogController::class, 'forceDelete'])->withTrashed()->name('blog.forceDelete');
-        });
+        })->middleware('BlogAccess');
 
         /**
          * Product Resource Controller
