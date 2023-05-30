@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
@@ -28,7 +29,13 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [FrontController::class, 'index'])->name('home.index');
 Route::get('/blog/all', [FrontController::class, 'blog'])->name('home.blog');
 Route::get('/shop', [FrontController::class, 'shop'])->name('home.shop');
-Route::get('/about', [FrontController::class, 'about'])->name('home.about');
+
+/**
+ * Single Action Controller 
+ */
+
+Route::get('/about', AboutController::class)->name('home.about');
+
 
 Auth::routes();
 
