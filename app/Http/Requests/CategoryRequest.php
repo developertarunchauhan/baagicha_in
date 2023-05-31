@@ -21,10 +21,20 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => 'required|unique:categories|min:4|max:255',
-            'description' => 'required|min:5|max:500',
-            'image' => 'required|image|mimes:png,jpeg,jpg|max:1024'
-        ];
+        if (request()->isMethod('POST')) {
+            $rules = [
+                'title' => 'required|unique:categories|min:4|max:255',
+                'description' => 'required|min:5|max:500',
+                'image' => 'required|image|mimes:png,jpeg,jpg|max:1024'
+            ];
+        } elseif (request()->isMethod('PUT')) {
+            $rules = [
+                'title' => 'required|min:4|max:255',
+                'description' => 'required|min:5|max:500',
+                'image' => 'image|mimes:png,jpeg,jpg|max:1024'
+            ];
+        } else {
+        }
+        return $rules;
     }
 }

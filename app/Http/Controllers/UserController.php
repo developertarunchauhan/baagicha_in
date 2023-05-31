@@ -42,6 +42,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        //return $request->method();
         $data = $request->validated();
         //$data['email_verified_at'] = now();
         $data['password'] = Hash::make($data['password']);
@@ -69,15 +70,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'password' => 'confirmed',
-            'role_id' => 'required'
-        ]);
-
-        return $request;
+        $data = $request->validated();
+        return $data['password'];
+        $user->update($data);
+        return redirect(route('user.index'))->with('_update', 'User information updated');
     }
 
     /**

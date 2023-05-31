@@ -7,7 +7,7 @@
             <x-card.header title="Add User" url="user" />
             <!-- /.card-header -->
             <div class="card-body">
-                <x-form.form :action="route('user.edit',$user)" :edit="true">
+                <x-form.form :action="route('user.update',$user)" :edit="true">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="nameHelp" value="{{old('name',$user->name)}}" required>
@@ -36,20 +36,20 @@
                         </div>
                         @enderror
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="passwordlHelp" required>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" aria-describedby="passwordlHelp">
                         @error('password')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" id="password_confirmation" aria-describedby="passwordHelp" required>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" id="password_confirmation" aria-describedby="passwordHelp">
                         @error('password')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
-                    </div>
+                    </div> -->
                 </x-form.form>
             </div>
             <!-- /.card-body -->

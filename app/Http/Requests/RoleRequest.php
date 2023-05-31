@@ -21,15 +21,18 @@ class RoleRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => 'required|unique:roles|min:4|max:255',
-            'description' => 'required|min:5|max:500'
-        ];
-    }
-    public function message()
-    {
-        return [
-            'title.required' => 'Oh Snap !! yo forgot to enter your title for your role',
-        ];
+        if (request()->isMethod('POST')) {
+            $rules = [
+                'title' => 'required|unique:roles|min:4|max:255',
+                'description' => 'required|min:5|max:500'
+            ];
+        } elseif (request()->isMethod('PUT')) {
+            $rules = [
+                'title' => 'required|min:4|max:255',
+                'description' => 'required|min:5|max:500'
+            ];
+        } else {
+        }
+        return $rules;
     }
 }

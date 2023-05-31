@@ -21,11 +21,21 @@ class SubcategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => 'required|unique:subcategories|min:4|max:255',
-            'cat' => 'required',
-            'description' => 'required|min:5|max:500',
-            'image' => 'required|image|mimes:png,jpeg,jpg|max:1024'
-        ];
+        if (request()->isMethod('POST')) {
+            $rules = [
+                'title' => 'required|unique:subcategories|min:4|max:255',
+                'cat' => 'required',
+                'description' => 'required|min:5|max:500',
+                'image' => 'required|image|mimes:png,jpeg,jpg|max:1024'
+            ];
+        } else {
+            $rules = [
+                'title' => 'required|min:4|max:255',
+                //'cat' => 'required',
+                'description' => 'required|min:5|max:500',
+                'image' => 'image|mimes:png,jpeg,jpg|max:1024'
+            ];
+        }
+        return $rules;
     }
 }
