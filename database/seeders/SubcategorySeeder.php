@@ -16,7 +16,7 @@ class SubcategorySeeder extends Seeder
     {
         $faker = Faker::create();
         $cats = \App\Models\Category::all()->count();
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $title = $faker->sentence(rand(1, 2)) . " " . $faker->word;
             $subcategory = \App\Models\Subcategory::create([
                 'title' => $title,

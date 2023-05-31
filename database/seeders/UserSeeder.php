@@ -132,11 +132,11 @@ class UserSeeder extends Seeder
          */
         $faker = Faker::create();
         $role_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $name = $faker->name . "" . $faker->word;
             DB::table('users')->insert([
                 'name' => $name,
-                'handle' => Str::slug($name, "-"),
+                'handle' => Str::slug($name, "-") . '-' . strtolower(Str::random(5)),
                 'email' => 'user_' . $i . '@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('user_' . $i . '@123'),

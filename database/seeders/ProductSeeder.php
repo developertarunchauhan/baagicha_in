@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
         $faker = Faker::create();
         $cat_count = \App\Models\Category::all()->count();
         $subcat_count = \App\Models\Subcategory::all()->count();
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $title = $faker->sentence(rand(1, 6)) . "" . $faker->word();
             $product = \App\Models\Product::create([
                 'title' => $title,

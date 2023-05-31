@@ -19,7 +19,7 @@ class BlogSeeder extends Seeder
         $faker = Faker::create();
         $cats = \App\Models\Category::all()->count();
 
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $title = $faker->sentence($nbWords = 6, $variableNbWords = true);
             $blog = \App\Models\Blog::create([
                 'title' => $title,

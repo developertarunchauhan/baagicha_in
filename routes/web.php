@@ -37,12 +37,14 @@ Route::get('/shop', [FrontController::class, 'shop'])->name('home.shop');
 Route::get('/about', AboutController::class)->name('home.about');
 
 
-Auth::routes();
+Auth::routes([
+    'verify' => true,
+]);
 
 /**
  * Route Middleware
  */
-Route::middleware(['auth'])->group(
+Route::middleware(['auth', 'verified'])->group(
     function () {
 
         /**
@@ -63,7 +65,12 @@ Route::middleware(['auth'])->group(
         /**
          * User Resource Controller
          */
-        Route::resource('user', UserController::class);
+        Route::resource('user', UserController::class)->middleware('RoleUserAccess');
+        Route::group(['prefix' => 'user'], function () {
+            Route::get('/trashed/{action}', [UserController::class, 'trashed'])->name('user.trashed');
+            Route::get('/restore/{user}', [UserController::class, 'restore'])->withTrashed()->name('user.restore');
+            Route::delete('/forceDelete/{user}', [UserController::class, 'forceDelete'])->withTrashed()->name('user.forceDelete');
+        })->middleware('RoleUserAccess');
 
         /**
          * Category Resource Controller
@@ -107,3 +114,9 @@ Route::middleware(['auth'])->group(
         });
     }
 );
+
+
+
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');

@@ -21,7 +21,7 @@
                             <td>{{$user->email}}<br>
                                 <small>{{$user->handle}}</small>
                             </td>
-                            <td><x-table.options :model="$user" url="user" /></td>
+                            <td><x-table.trash-option :model="$user" url="user" /></td>
                         </tr>
                         @endforeach
                     </tbody>
