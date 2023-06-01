@@ -9,7 +9,8 @@
                 <table id="myTable" class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>Image</th>
+                            <th>#</th>
+                            <th>Role</sth>
                             <th>Details</th>
                             <th>Options</th>
                         </tr>
@@ -17,8 +18,10 @@
                     <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}<br>
+                            <th>{{$loop->iteration}}</th>
+                            <td><span class="{{$user->role->rolecolor}} text-light px-1 rounded text-small">@if($user->role->title) {{$user->role->title}} @else Guest @endif</span></td>
+                            <td>{{$user->name}} <br>
+                                {{$user->email}}<br>
                                 <small>{{$user->handle}}</small>
                             </td>
                             <td><x-table.options :model="$user" url="user" /></td>
@@ -27,7 +30,8 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Title</th>
+                            <th>#</th>
+                            <th>Role</th>
                             <th>Description</th>
                             <th>Options</th>
                         </tr>

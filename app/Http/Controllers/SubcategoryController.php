@@ -79,6 +79,24 @@ class SubcategoryController extends Controller
      */
     public function update(SubcategoryRequest $request, Subcategory $subcategory)
     {
+        $data = $request->validated();
+        //return $data;
+        if (array_key_exists("image", $data)) {
+            if ($request->file('image')->isValid()) {
+                $old_image = $subcategory->image;
+                Storage::delete('/public/images/' . $old_image); // Deleting old images
+                $image = $request->file('image');
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $destination_path = public_path('storage/images/' . $image_name);
+                Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
+                $data['image'] = $image_name;
+            }
+        }
+
+        $subcategory->update($data);
+
+        $subcategory->categories()->sync($data['cat']);
+        return redirect(route('subcategory.index'))->with('_update', 'Subcategory Updated');
     }
 
     /**

@@ -45,6 +45,7 @@ class BlogController extends Controller
     public function store(BlogRequest $request)
     {
         $data = $request->validated();
+        //return $data;
         if ($request->file('image')->isValid()) {
             $image = $request->file('image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
@@ -84,7 +85,20 @@ class BlogController extends Controller
     {
         $data = $request->validated();
 
-        return $data;
+        if (array_key_exists('image', $data)) {
+            if ($request->file('image')->isValid()) {
+                $image = $request->file('image');
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $destination_path = public_path('storage/images/' . $image_name);
+                Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
+                //$request->image->storeAs('public/images', $image_name);
+                $data['image'] = $image_name;
+            }
+        }
+        $data['user_id'] = auth()->user()->id;
+        $blog->update($data);
+        $blog->categories()->sync($data['cat']);
+        return redirect(route('blog.index'))->with('_update', 'Blog Updated');
     }
 
     /**

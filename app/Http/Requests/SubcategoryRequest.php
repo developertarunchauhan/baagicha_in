@@ -28,13 +28,14 @@ class SubcategoryRequest extends FormRequest
                 'description' => 'required|min:5|max:500',
                 'image' => 'required|image|mimes:png,jpeg,jpg|max:1024'
             ];
-        } else {
+        } elseif (request()->isMethod('PUT')) {
             $rules = [
                 'title' => 'required|min:4|max:255',
-                //'cat' => 'required',
+                'cat' => 'required',
                 'description' => 'required|min:5|max:500',
                 'image' => 'image|mimes:png,jpeg,jpg|max:1024'
             ];
+        } else {
         }
         return $rules;
     }

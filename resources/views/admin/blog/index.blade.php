@@ -9,7 +9,8 @@
                 <table id="myTable" class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>Image</th>
+                            <th>#</th>
+                            <!-- <th>Image</th> -->
                             <th>Details</th>
                             <th>Options</th>
                         </tr>
@@ -17,9 +18,10 @@
                     <tbody>
                         @foreach($blogs as $blog)
                         <tr>
-                            <td style="width:15%">
+                            <th>{{$loop->iteration}}</th>
+                            <!-- <td style="width:15%">
                                 <img src="{{asset('/storage/images/'.$blog->image)}}" alt="" srcset="" class="img-fluid">
-                            </td>
+                            </td> -->
                             <td>
                                 {{$blog->title}}<br>
                                 <small>
@@ -35,7 +37,8 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Image</th>
+                            <th>#</th>
+                            <!-- <th>Image</th> -->
                             <th>Details</th>
                             <th>Options</th>
                         </tr>

@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image as Image;
+use App\Http\Traits\HandleFiles;
 
 class CategoryController extends Controller
 {
+    use HandleFiles;
+
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $categories = Category::all();
@@ -42,12 +44,8 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request, Category $category)
     {
         $data = $request->validated();
-        if ($request->file('image')->isValid()) {
-            $image = $request->file('image');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $destination_path = public_path('storage/images/' . $image_name);
-            Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
-            $data['image'] = $image_name;
+        if (array_key_exists('image', $data)) {
+            $data['image'] = $this->uploadImage($request);
         }
         Category::create($data);
         return redirect(route('category.index'))->with('_store', 'New Category Created');
@@ -76,16 +74,8 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
         if (array_key_exists("image", $data)) {
-            if ($request->file('image')->isValid()) {
-                //IMPROVE THIS CODE IN SECOND ITERATION
-                $old_image = $category->image;
-                Storage::delete('/public/images/' . $old_image); // Deleting old image
-                $image = $request->file('image');
-                $image_name = time() . '.' . $image->getClientOriginalExtension();
-                $destination_path = public_path('storage/images/' . $image_name);
-                Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
-                $data['image'] = $image_name;
-            }
+            $this->deleteImage($category->image);
+            $data['image'] = $this->uploadImage($request);
         }
         $category->update($data);
         return redirect(route('category.index'))->with('_update', 'Category Updated');
@@ -114,7 +104,7 @@ class CategoryController extends Controller
      */
     public function forceDelete(Category $category)
     {
-        Storage::delete('/public/images/' . $category->image);
+        $this->deleteImage($category->image);
         $category->forceDelete();
         return redirect(route('category.trashed', 'trashed'))->with('_forceDelete', 'Category Deleted Permanently');
     }

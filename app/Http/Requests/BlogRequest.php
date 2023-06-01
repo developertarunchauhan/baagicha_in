@@ -21,16 +21,32 @@ class BlogRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => 'required|unique:blogs|min:3|max:255',
-            'excrept' => 'required|max:255',
-            'body' => 'required',
-            'image' => 'required|image|mimes:png,jpeg,jpg|max:1024',
-            'tags' => 'required',
-            'meta_description' => 'required|max:255',
-            'seo_title' => 'required|max:255',
-            'status' => 'required',
-            'cat' => 'required',
-        ];
+        if (request()->isMethod('POST')) {
+            $rules = [
+                'title' => 'required|unique:blogs|min:3|max:255',
+                'excrept' => 'required|max:255',
+                'body' => 'required',
+                'image' => 'required|image|mimes:png,jpeg,jpg|max:1024',
+                'tags' => 'required|max:255',
+                'meta_description' => 'required|max:255',
+                'seo_title' => 'required|max:255',
+                'status' => 'required',
+                'cat' => 'required',
+            ];
+        } else if (request()->isMethod('PUT')) {
+            $rules = [
+                'title' => 'required|min:3|max:255',
+                'excrept' => 'required|max:255',
+                'body' => 'required',
+                'image' => 'image|mimes:png,jpeg,jpg|max:1024',
+                'tags' => 'required|max:255',
+                'meta_description' => 'required|max:255',
+                'seo_title' => 'required|max:255',
+                'status' => 'required',
+                'cat' => 'required',
+            ];
+        } else {
+        }
+        return $rules;
     }
 }
