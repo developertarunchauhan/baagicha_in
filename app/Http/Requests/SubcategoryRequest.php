@@ -26,14 +26,14 @@ class SubcategoryRequest extends FormRequest
                 'title' => 'required|unique:subcategories|min:4|max:255',
                 'cat' => 'required',
                 'description' => 'required|min:5|max:500',
-                'image' => 'required|image|mimes:png,jpeg,jpg|max:1024'
+                'image' => 'required|image|mimes:png,jpeg,jpg|max:2048'
             ];
         } elseif (request()->isMethod('PUT')) {
             $rules = [
                 'title' => 'required|min:4|max:255',
                 'cat' => 'required',
                 'description' => 'required|min:5|max:500',
-                'image' => 'image|mimes:png,jpeg,jpg|max:1024'
+                'image' => 'image|mimes:png,jpeg,jpg|max:2048'
             ];
         } else {
         }

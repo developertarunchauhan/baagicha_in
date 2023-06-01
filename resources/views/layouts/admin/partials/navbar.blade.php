@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light shadow fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary shadow fixed-top shadow">
     <div class="container-fluid">
         <!-- Offcanvas Toggle Begin-->
         <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -15,12 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
+
             </ul>
 
             <!-- Right Side Of Navbar -->

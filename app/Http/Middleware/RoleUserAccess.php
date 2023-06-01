@@ -15,7 +15,7 @@ class RoleUserAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role->id === 1) {
+        if (auth()->user()->role->slug === 'admin') {
             //return response()->json('Your account is inactive'); returns in JSON format
             return $next($request);
         }

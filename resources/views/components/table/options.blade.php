@@ -29,7 +29,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">No</button>
-                        <a href="#" class="btn btn-outline-success btn-sm">Yes</a>
+                        <a href="{{route($url.'.status',$model)}}" class="btn btn-outline-success btn-sm">Yes</a>
                     </div>
                 </div>
             </div>

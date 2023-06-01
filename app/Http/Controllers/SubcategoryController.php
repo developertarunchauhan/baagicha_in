@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SubcategoryRequest;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as Image;
+use App\Http\Traits\HandleFiles;
 
 class SubcategoryController extends Controller
 {
+    use HandleFiles;
     /**
      * Display a listing of the resource.
      */
@@ -44,12 +46,8 @@ class SubcategoryController extends Controller
     public function store(SubcategoryRequest $request)
     {
         $data = $request->validated();
-        if ($request->file('image')->isValid()) {
-            $image = $request->file('image');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $destination_path = public_path('storage/images/' . $image_name);
-            Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
-            $data['image'] = $image_name;
+        if (array_key_exists('image', $data)) {
+            $data['image'] = $this->uploadImage($request);
         }
         $subcategory = Subcategory::create($data);
 
@@ -82,15 +80,8 @@ class SubcategoryController extends Controller
         $data = $request->validated();
         //return $data;
         if (array_key_exists("image", $data)) {
-            if ($request->file('image')->isValid()) {
-                $old_image = $subcategory->image;
-                Storage::delete('/public/images/' . $old_image); // Deleting old images
-                $image = $request->file('image');
-                $image_name = time() . '.' . $image->getClientOriginalExtension();
-                $destination_path = public_path('storage/images/' . $image_name);
-                Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
-                $data['image'] = $image_name;
-            }
+            $this->deleteImage($subcategory->image);
+            $data['image'] = $this->uploadImage($request);
         }
 
         $subcategory->update($data);

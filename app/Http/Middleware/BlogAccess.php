@@ -15,7 +15,7 @@ class BlogAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role->id === 1 || auth()->user()->role->id === 2) {
+        if (auth()->user()->role->slug === 'admin' || auth()->user()->role->slug === 'blogger') {
             //return response()->json('Your account is inactive'); returns in JSON format
             return $next($request);
         }

@@ -101,6 +101,7 @@ Route::middleware(['auth', 'verified'])->group(
             Route::get('/trashed/{action}', [BlogController::class, 'trashed'])->name('blog.trashed');
             Route::get('/restore/{blog}', [BlogController::class, 'restore'])->withTrashed()->name('blog.restore');
             Route::delete('/forceDelete/{blog}', [BlogController::class, 'forceDelete'])->withTrashed()->name('blog.forceDelete');
+            Route::get('/status/{blog}', [BlogController::class, 'status'])->name('blog.status');
         })->middleware('BlogAccess');
 
         /**

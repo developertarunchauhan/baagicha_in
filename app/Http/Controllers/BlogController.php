@@ -8,16 +8,18 @@ use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as Image;
 use App\Models\Category;
+use App\Http\Traits\HandleFiles;
 
 class BlogController extends Controller
 {
+    use HandleFiles;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $blogs = Blog::with(['user', 'categories'])->get();
-        //$blogs = Blog::all(); //N+1 loading problem
         return view('admin.blog.index', compact('blogs'));
     }
 
@@ -45,17 +47,10 @@ class BlogController extends Controller
     public function store(BlogRequest $request)
     {
         $data = $request->validated();
-        //return $data;
-        if ($request->file('image')->isValid()) {
-            $image = $request->file('image');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $destination_path = public_path('storage/images/' . $image_name);
-            Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
-            //$request->image->storeAs('public/images', $image_name);
-            $data['image'] = $image_name;
+        if (array_key_exists('image', $data)) {
+            $data['image'] = $this->uploadImage($request);
         }
         $data['user_id'] = auth()->user()->id;
-
         $blog = Blog::create($data);
         $blog->categories()->attach($data['cat']);
         return redirect(route('blog.index'))->with('_store', 'New Blog Saved');
@@ -86,14 +81,8 @@ class BlogController extends Controller
         $data = $request->validated();
 
         if (array_key_exists('image', $data)) {
-            if ($request->file('image')->isValid()) {
-                $image = $request->file('image');
-                $image_name = time() . '.' . $image->getClientOriginalExtension();
-                $destination_path = public_path('storage/images/' . $image_name);
-                Image::make($image)->resize(300, 300)->save($destination_path, 80); // image intervention
-                //$request->image->storeAs('public/images', $image_name);
-                $data['image'] = $image_name;
-            }
+            $this->deleteImage($blog->image);
+            $data['image'] = $this->uploadImage($request);
         }
         $data['user_id'] = auth()->user()->id;
         $blog->update($data);
@@ -130,5 +119,11 @@ class BlogController extends Controller
             Storage::delete($image_path);
         }
         return redirect(route('blog.trashed', 'trashed'))->with('_forceDelete', 'Blog Deleted permanently');
+    }
+    public function status(Blog $blog)
+    {
+        $blog->status = $blog->status === 'Published' ? 'Draft' : 'Published';
+        $blog->save();
+        return redirect(route('blog.index'))->with('_restore', 'Status Updated');
     }
 }
