@@ -1,0 +1,25 @@
+.footer {
+    //height: 400px;
+    width: 100%;
+    background-color: $gray-900;
+    padding: 3rem 10rem;
+
+    & h4 {
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: $white;
+    }
+
+    & ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    & li a:link,
+    & li a:active,
+    & li a:visited {
+        text-decoration: none;
+        color: $white;
+        font-size: .9rem;
+    }
+}

@@ -112,6 +112,7 @@ Route::middleware(['auth', 'verified'])->group(
             Route::get('/trashed/{action}', [ProductController::class, 'trashed'])->name('product.trashed');
             Route::get('/restore/{product}', [ProductController::class, 'restore'])->withTrashed()->name('product.restore');
             Route::delete('/forceDelete/{product}', [ProductController::class, 'forceDelete'])->withTrashed()->name('product.forceDelete');
+            Route::get('/status/{product}', [ProductController::class, 'status'])->name('product.status');
         });
     }
 );

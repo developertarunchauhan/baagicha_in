@@ -18,6 +18,16 @@ class ProductController extends Controller
         return view('admin.product.index', compact('products'));
     }
 
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function trashed()
+    {
+        $products = Product::onlyTrashed()->get();
+        return view('admin.product.trash', compact('products'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -33,7 +43,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return "HELLo";
     }
 
     /**
@@ -65,6 +75,15 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect(route('product.index'))->with('_destory', 'Product moved to trash');
+    }
+    /**
+     * Restore the specified resource from trash.
+     */
+    public function restore(Product $product)
+    {
+        $product->restore();
+        return redirect(route('product.index'))->with('_restore', 'Product Restored');
     }
 }

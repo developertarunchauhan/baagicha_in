@@ -12,7 +12,7 @@ class FrontController extends Controller
     public function index()
     {
         $products = Product::with('categories')->paginate(4);
-        $categories = Category::with('products')->get();
+        $categories = Category::with('products')->inRandomOrder()->get();
         $featured_products = Product::with('categories')->inRandomOrder()->limit(5)->get();
         return view('front.home.index', compact('products', 'categories', 'featured_products'));
     }

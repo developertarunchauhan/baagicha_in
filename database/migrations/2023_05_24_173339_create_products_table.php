@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->string('slug');
-            $table->text('description');
+            $table->text('body');
             $table->float('price');
             $table->string('image');
             $table->enum('status', ['In Stocks', 'Out Of Stock', 'Not Available', 'Available Soon']);

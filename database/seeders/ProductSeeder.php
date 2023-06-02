@@ -22,7 +22,7 @@ class ProductSeeder extends Seeder
             $product = \App\Models\Product::create([
                 'title' => $title,
                 'slug' => Str::slug($title, '-'),
-                'description' => $faker->sentence($nbWords = 20, $variableNbWords = true),
+                'body' => $faker->sentence($nbWords = 20, $variableNbWords = true),
                 'image' => 'img_' . rand(1, 5) . '.jpg',
                 'status' => rand(0, 1) ? 'In Stocks' : 'Out Of Stock',
                 'price' => rand(100, 1000),

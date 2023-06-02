@@ -1,0 +1,11 @@
+.hero-container {}
+
+.hero {
+    &-inner {}
+}
+
+.hero-products {
+    border: 1px solid pink;
+    height: 20rem;
+    width: 100%;
+}

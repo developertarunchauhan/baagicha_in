@@ -4,17 +4,17 @@
 <div class="row justify-content-center">
     <div class="col-lg-12 col-xl-10">
         <div class="card shadow">
-            <x-card.header title="Add Blog" url="blog" />
+            <x-card.header title="Add Product" url="product" />
             <!-- /.card-header -->
             <div class="card-body">
-                <x-form.form :action="route('blog.store')" edit="">
+                <x-form.form :action="route('product.store')" edit="">
                     <div class="row">
                         <div class="col-lg-8">
                             <x-form.title :value="old('title')" />
-                            <x-form.description :value="old('description')" />
+                            <x-form.body :value="old('body')" />
                             <div class="mb-3">
                                 <label for="title" class="form-label">Price</label>
-                                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="price" aria-describedby="titleHelp" value="{{old('price')}}" required>
+                                <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price" aria-describedby="titleHelp" value="{{old('price')}}" required>
                                 @error('price')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
