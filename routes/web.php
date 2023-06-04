@@ -10,6 +10,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VarietyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [FrontController::class, 'index'])->name('home.index');
 Route::get('/blog/all', [FrontController::class, 'blog'])->name('home.blog');
 Route::get('/shop', [FrontController::class, 'shop'])->name('home.shop');
+
+
+Route::resource('variety', VarietyController::class);
 
 /**
  * Single Action Controller 
