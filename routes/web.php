@@ -11,6 +11,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VarietyController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::get('/blog/all', [FrontController::class, 'blog'])->name('home.blog');
 Route::get('/shop', [FrontController::class, 'shop'])->name('home.shop');
 
 
-Route::resource('variety', VarietyController::class);
+
 
 /**
  * Single Action Controller 
@@ -40,6 +41,11 @@ Route::resource('variety', VarietyController::class);
 
 Route::get('/about', AboutController::class)->name('home.about');
 
+/**
+ * File resource controller
+ */
+
+Route::resource('file', FileController::class);
 
 Auth::routes([
     'verify' => true,
@@ -106,6 +112,17 @@ Route::middleware(['auth', 'verified'])->group(
             Route::get('/restore/{blog}', [BlogController::class, 'restore'])->withTrashed()->name('blog.restore');
             Route::delete('/forceDelete/{blog}', [BlogController::class, 'forceDelete'])->withTrashed()->name('blog.forceDelete');
             Route::get('/status/{blog}', [BlogController::class, 'status'])->name('blog.status');
+        })->middleware('BlogAccess');
+
+        /**
+         * Variety Resource Controller
+         */
+        Route::resource('variety', VarietyController::class);
+        Route::group(['prefix' => 'variety'], function () {
+            Route::get('/trashed/{action}', [BlogController::class, 'trashed'])->name('variety.trashed');
+            Route::get('/restore/{variety}', [BlogController::class, 'restore'])->withTrashed()->name('variety.restore');
+            Route::delete('/forceDelete/{variety}', [BlogController::class, 'forceDelete'])->withTrashed()->name('variety.forceDelete');
+            Route::get('/status/{variety}', [BlogController::class, 'status'])->name('variety.status');
         })->middleware('BlogAccess');
 
         /**

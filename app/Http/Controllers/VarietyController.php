@@ -18,9 +18,9 @@ class VarietyController extends Controller
 
         //return $parent_varieties;
         // $varieties = Variety::where('variety_id', 0)->with(['children'])->get();
-        // //$varieties = Variety::all();
+        //$varieties = Variety::all();
         // $all_varieties = Variety::all();
-        return view('front.variety.index', compact('varieties'));
+        return view('admin.variety.index', compact('varieties'));
     }
 
     /**
@@ -28,7 +28,8 @@ class VarietyController extends Controller
      */
     public function create()
     {
-        //
+        $varieties = Variety::where('variety_id', 0)->get();
+        return view('admin.variety.create', compact('varieties'));
     }
 
     /**
@@ -38,7 +39,7 @@ class VarietyController extends Controller
     {
         $data = $request->validated();
         Variety::create($data);
-        return redirect(route('variety.index'))->with('_store', 'New Blog Saved');
+        return redirect(route('variety.index'))->with('_store', 'New Variety Saved');
     }
 
     /**
@@ -53,16 +54,18 @@ class VarietyController extends Controller
      */
     public function edit(Variety $variety)
     {
-        $all_varieties = Variety::all();
-        return view('front.variety.edit', compact('variety', 'all_varieties'));
+        $varieties = Variety::where('variety_id', 0)->with(['children'])->get();
+        return view('front.variety.edit', compact('variety', 'varieties'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Variety $variety)
+    public function update(VarietyRequest $request, Variety $variety)
     {
-        //
+        $data = $request->validated();
+        $variety->update($data);
+        return redirect(route('variety.index'))->with('_update', 'Variety updated');
     }
 
     /**

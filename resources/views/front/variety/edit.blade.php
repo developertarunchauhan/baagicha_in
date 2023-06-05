@@ -23,11 +23,12 @@
                             <x-form.title :value="old('title',$variety->title)" />
                             <x-form.description :value="old('description',$variety->description)" />
                             <div class="form-group">
-                                <label for="role_id">Role</label>
-                                <select class="form-control @error('role_id') is-invalid @enderror" id="role_id" name="role_id">
-                                    <option value="" selected>Select</option>
-                                    @foreach($all_varieties as $var)
-                                    <option value="{{$var->id}}" @if($variety->parent->id === $var->id) selected @endif >@if($var->children) -- @endif {{$var->title}}</option>
+                                <label for="variety_id">Parent Cateogory</label>
+                                <select class="form-control @error('variety_id') is-invalid @enderror" id="variety_id" name="variety_id">
+                                    <option value="0" selected>Select</option>
+                                    @foreach($varieties as $variety)
+                                    <option value="{{$variety->id}}">{{$variety->title}}</option>
+                                    <x-variety.option :children="$variety->children" :margin="$loop->iteration" />
                                     @endforeach
                                 </select>
                                 @error('role_id')

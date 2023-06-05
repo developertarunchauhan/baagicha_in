@@ -79,6 +79,33 @@
                         </div>
                     </div>
                     <!-- Blog Manager Ends-->
+                    <!-- Variety Manager Begin-->
+                    <a class="nav-link sidebar-link text-light px-3" data-bs-toggle="collapse" href="#varietymanager" role="button" aria-expanded="false" aria-controls="varietymanager">
+                        <span class="me-2 fs-3"><i class="bi bi-blockquote-left"></i></span>
+                        <span>Variety Manager</span>
+                        <span class="right-icon ms-auto"><i class="bi bi-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse" id="varietymanager">
+                        <div class="bg-primary text-light">
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a href="{{route('variety.index')}}" class="nav-link px-3  text-light">
+                                        <span class="me-2">
+                                            <i class="bi bi-list"></i>
+                                        </span>
+                                        <span>Variety</span>
+                                    </a>
+                                    <a href="{{route('blog.index')}}" class="nav-link px-3  text-light">
+                                        <span class="me-2">
+                                            <i class="bi bi-list-columns"></i>
+                                        </span>
+                                        <span>Blogs</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Variety Manager Ends-->
                     <!-- eCommerce Manager Begin-->
                     <a class="nav-link sidebar-link px-3 text-light" data-bs-toggle="collapse" href="#ecommercemanager" role="button" aria-expanded="false" aria-controls="ecommercemanager">
                         <span class="me-2 fs-4"><i class="bi bi-cart"></i></span>

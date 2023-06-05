@@ -22,7 +22,7 @@ class Variety extends Model
 
     public function children()
     {
-        return $this->hasMany(self::class, 'variety_id')->with('children');
+        return $this->hasMany(self::class, 'variety_id');
     }
 
     public function parent()

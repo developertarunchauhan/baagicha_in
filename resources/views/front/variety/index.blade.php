@@ -26,9 +26,9 @@
                             <x-form.title :value="old('title')" />
                             <x-form.description :value="old('description')" />
                             <div class="form-group">
-                                <label for="role_id">Role</label>
-                                <select class="form-control @error('role_id') is-invalid @enderror" id="role_id" name="role_id">
-                                    <option value="" selected>Select</option>
+                                <label for="variety_id">Parent Cateogory</label>
+                                <select class="form-control @error('variety_id') is-invalid @enderror" id="variety_id" name="variety_id">
+                                    <option value="0" selected>Select</option>
                                     @foreach($varieties as $variety)
                                     <option value="{{$variety->id}}">{{$variety->title}}</option>
                                     @if($variety->children)
@@ -50,19 +50,21 @@
                 </div>
                 <div class="card shadow">
                     <div class="card-body">
-                        <ol>
-                            @foreach($varieties as $variety)
-                            <li>{{$variety->title}} ({{$variety->children->count()}})</li>
-                            <ol>
-                                @if($variety->children)
-                                @foreach($variety->children as $child_1)
-                                <li>{{$child_1->title}}({{$child_1->children->count()}})</li>
-                                <x-variety.child :child="$child_1->children" />
-                                @endforeach
-                                @endif
-                            </ol>
+                        <div class="variety-box">
+                            @if($varieties->count() === 0)
+                            <div class="alert alert-danger">No Varieties categories Please add new</div>
+                            @else
+                            @foreach($varieties as $parent)
+                            <div class="alert alert-info shadow d-flex justify-content-between" style="width:30vw">{{$parent->title}} | Total Child : {{$parent->children->count()}} | ID :{{$parent->id}}
+                                <div>
+                                    <a href="{{route('variety.edit',$parent)}}" class="btn btn-outline-info btn-sm"><i class="bi bi-pencil"></i></a>
+                                    <a href="#" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                </div>
+                            </div>
+                            <x-variety.child :children="$parent->children" :margin="$loop->iteration" />
                             @endforeach
-                        </ol>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
