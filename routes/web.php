@@ -12,6 +12,7 @@ use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VarietyController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +136,43 @@ Route::middleware(['auth', 'verified'])->group(
             Route::delete('/forceDelete/{product}', [ProductController::class, 'forceDelete'])->withTrashed()->name('product.forceDelete');
             Route::get('/status/{product}', [ProductController::class, 'status'])->name('product.status');
         });
+
+
+        /**
+         * 
+         * QUIZ CONTROLLER
+         * 
+         */
+
+        /**
+         * Exam Resource Controller
+         */
+        Route::resource('exam', ExamController::class)->middleware('RoleUserAccess');
+        Route::group(['prefix' => 'exam'], function () {
+            Route::get('/trashed/{action}', [ExamController::class, 'trashed'])->name('exam.trashed');
+            Route::get('/restore/{exam}', [ExamController::class, 'restore'])->withTrashed()->name('exam.restore');
+            Route::delete('/forceDelete/{exam}', [ExamController::class, 'forceDelete'])->withTrashed()->name('exam.forceDelete');
+        })->middleware('RoleUserAccess');
+
+        /**
+         * Question Resource Controller
+         */
+        Route::resource('question', QuestionController::class)->middleware('RoleUserAccess');
+        Route::group(['prefix' => 'question'], function () {
+            Route::get('/trashed/{action}', [QuestionController::class, 'trashed'])->name('question.trashed');
+            Route::get('/restore/{question}', [QuestionController::class, 'restore'])->withTrashed()->name('question.restore');
+            Route::delete('/forceDelete/{question}', [QuestionController::class, 'forceDelete'])->withTrashed()->name('question.forceDelete');
+        })->middleware('RoleUserAccess');
+
+        /**
+         * Answer Resource Controller
+         */
+        Route::resource('answer', AnswerController::class)->middleware('RoleUserAccess');
+        Route::group(['prefix' => 'answer'], function () {
+            Route::get('/trashed/{action}', [AnswerController::class, 'trashed'])->name('answer.trashed');
+            Route::get('/restore/{answer}', [AnswerController::class, 'restore'])->withTrashed()->name('answer.restore');
+            Route::delete('/forceDelete/{answer}', [AnswerController::class, 'forceDelete'])->withTrashed()->name('answer.forceDelete');
+        })->middleware('RoleUserAccess');
     }
 );
 

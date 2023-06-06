@@ -134,6 +134,34 @@
                         </div>
                     </div>
                     <!-- eCommerce Manager Ends-->
+                    <!-- Quiz Management Begin-->
+                    <a class="nav-link sidebar-link px-3 text-light" data-bs-toggle="collapse" href="#quizmanager" role="button" aria-expanded="false" aria-controls="quizmanager">
+                        <span class="me-2 fs-4"><i class="bi bi-vector-pen"></i></span>
+                        <span>Quiz Manager</span>
+                        <span class="right-icon ms-auto"><i class="bi bi-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse" id="quizmanager">
+                        <div class="bg-primary">
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a href="{{route('exam.index')}}" class="nav-link px-3 text-light">
+                                        <span class="me-2">
+                                            <i class="bi bi-file-earmark-text"></i>
+                                        </span>
+                                        <span>Exams</span>
+                                    </a>
+                                    <a href="{{route('product.index')}}" class="nav-link px-3 text-light">
+                                        <span class="me-2">
+                                            <i class="bi bi-app-indicator"></i>
+                                        </span>
+                                        <span>Que & Ans</span>
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Quiz Management Ends-->
                 </li>
             </ul>
         </nav>

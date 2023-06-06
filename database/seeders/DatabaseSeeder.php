@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             SubcategorySeeder::class,
             ProductSeeder::class,
             //VarietySeeder::class
+            ExamSeeder::class,
+            QuestionAnswerSeeder::class
         ]);
     }
 }
