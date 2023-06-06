@@ -130,19 +130,25 @@ class UserSeeder extends Seeder
         /**
          * Common users / visitors
          */
-        $faker = Faker::create();
-        $role_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        for ($i = 0; $i < 50; $i++) {
-            $name = $faker->name . "" . $faker->word;
-            DB::table('users')->insert([
-                'name' => $name,
-                'handle' => Str::slug($name, "-") . '-' . strtolower(Str::random(5)),
-                'email' => 'user_' . $i . '@gmail.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('user_' . $i . '@123'),
-                'remember_token' => Str::random(10),
-                'role_id' => $role_list[rand(0, 9)],
-            ]);
-        }
+        // $faker = Faker::create();
+        // $role_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        // for ($i = 0; $i < 50; $i++) {
+        //     $name = $faker->name . "" . $faker->word;
+        //     DB::table('users')->insert([
+        //         'name' => $name,
+        //         'handle' => Str::slug($name, "-") . '-' . strtolower(Str::random(5)),
+        //         'email' => 'user_' . $i . '@gmail.com',
+        //         'email_verified_at' => now(),
+        //         'password' => Hash::make('user_' . $i . '@123'),
+        //         'remember_token' => Str::random(10),
+        //         'role_id' => $role_list[rand(0, 9)],
+        //     ]);
+        // }
+
+        /**
+         * Using factory seeding to generate users
+         */
+
+        \App\Models\User::factory(100)->create();
     }
 }
