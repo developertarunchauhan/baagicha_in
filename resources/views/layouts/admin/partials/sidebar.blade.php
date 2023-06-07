@@ -150,7 +150,7 @@
                                         </span>
                                         <span>Exams</span>
                                     </a>
-                                    <a href="{{route('product.index')}}" class="nav-link px-3 text-light">
+                                    <a href="{{route('question.index')}}" class="nav-link px-3 text-light">
                                         <span class="me-2">
                                             <i class="bi bi-app-indicator"></i>
                                         </span>

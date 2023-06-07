@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Exam;
+use App\Http\Requests\ExamRequest;
 
 class ExamController extends Controller
 {
@@ -21,15 +22,20 @@ class ExamController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.exam.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ExamRequest $request)
     {
-        //
+        $data = $request->validated();
+        $exam = Exam::create($data);
+        if ($request->add_question) {
+            return redirect(route('question.add_question', $exam))->with('_store', 'Exam is saved.Now begin adding questions & answers');
+        }
+        return redirect(route('exam.index'))->with('_store', 'New exam created');
     }
 
     /**

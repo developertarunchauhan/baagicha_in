@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VarietyController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,7 +162,9 @@ Route::middleware(['auth', 'verified'])->group(
         Route::group(['prefix' => 'question'], function () {
             Route::get('/trashed/{action}', [QuestionController::class, 'trashed'])->name('question.trashed');
             Route::get('/restore/{question}', [QuestionController::class, 'restore'])->withTrashed()->name('question.restore');
+            Route::get('/status/{question}', [QuestionController::class, 'status'])->withTrashed()->name('question.status');
             Route::delete('/forceDelete/{question}', [QuestionController::class, 'forceDelete'])->withTrashed()->name('question.forceDelete');
+            Route::get('/add_question/{exam}', [QuestionController::class, 'add_question'])->name('question.add_question');
         })->middleware('RoleUserAccess');
 
         /**
