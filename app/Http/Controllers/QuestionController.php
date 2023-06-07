@@ -40,16 +40,27 @@ class QuestionController extends Controller
      */
     public function store(QuestionRequest $request)
     {
-        $data = $request->validated();
-        $is_correct = false;
-        //return $data;
-        $question = Question::create($data);
 
+        $data = $request->validated();
+        //return $data['correct_answers'];
         //return $data['answers'];
 
+        // foreach ($data['answers'] as $key => $value) {
+        //     echo "KEY : " . $key . " ---- Value " . $value . "<br>";
+        //     foreach ($data['correct_answers'] as $k => $v) {
+        //         echo "KEY : " . $k . " ----- " . $v . "<br>";
+        //         if ($key == $v) {
+        //             echo "CORRECT ANSWER is " . $data['answers'][$key] . "<br>";
+        //         }
+        //     }
+        // }
+        $is_correct = false;
+
+        $question = Question::create($data);
+
         foreach ($data['answers'] as $key => $value) {
-            foreach ($data['correct_answers'] as $ans) {
-                if ($key == $ans) {
+            foreach ($data['correct_answers'] as $k => $v) {
+                if ($key == $v) {
                     $is_correct = true;
                 }
             }
@@ -58,18 +69,16 @@ class QuestionController extends Controller
             $answer->answer = $value;
             $answer->is_correct = $is_correct;
             $answer->save();
-            //echo "<br>" . $key . " -- " . $value;
-            // foreach ($data['correct_answers'] as $xyz) {
-            // }
+            $is_correct = false;
         }
 
         return redirect()->back()->with('_store', 'New Question stores');
-        //return $question;
-        //return $request->all();
-        //return $request->answer['answers'];
-        // foreach ($request->answer['correct_answer'] as $abc) {
-        //     echo "Correct Answer " . $request->answer['answers'][$abc] . "<br>";
-        // }
+        // //return $question;
+        // //return $request->all();
+        // //return $request->answer['answers'];
+        // // foreach ($request->answer['correct_answer'] as $abc) {
+        // //     echo "Correct Answer " . $request->answer['answers'][$abc] . "<br>";
+        // // }
     }
 
     /**

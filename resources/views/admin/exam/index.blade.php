@@ -19,7 +19,7 @@
                             <td>
                                 {{$exam->title}}<br>
                                 <small>
-                                    ({{$exam->questions->count()}} Questions) <br>
+                                    ({{$exam->questions->count()}} Questions) <a href="{{route('question.add_question', $exam)}}">Add Question</a><br>
                                     {{ Str::limit($exam->description, 100)}}
                                 </small>
                             </td>

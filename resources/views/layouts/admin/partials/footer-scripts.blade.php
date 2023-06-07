@@ -84,3 +84,61 @@
 </script>
 
 <!-- Custom alets auto close ends-->
+
+<!-- Add more answers begin-->
+<script>
+    // Appending the answer input
+    $(document).ready(function() {
+        const max_fields = 7;
+        const answers = $('.answers');
+        const addNewAnswerField = $('.add-new-answer-field');
+        let count = 4; // initial count
+        const answerInput = ``;
+
+
+        $(addNewAnswerField).click(function(e) {
+            e.preventDefault();
+            console.log("ITS WORKING");
+            if (count < max_fields) {
+                if (count === max_fields - 1) {
+                    $(addNewAnswerField).prop("disabled", true);
+                }
+                let loop = count;
+                $(answers).append(`<div class="answers-box border-bottom border-primary py-3 mb-3">
+                
+                                <div class="mb-3">
+                                    <label for="question" class="form-label">Answer ` + (loop + 1) + `</label>
+                                    <textarea class="form-control @error('answers.*') is-invalid @enderror" id="answer_` + (loop + 1) + `" rows="2" name="answers[]">{{old('answers[]')}}</textarea>
+                                    @error('answers.*')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input @error('correct_answers.*') is-invalid @enderror" type="checkbox" value="` + loop + `" id="correct_answer_` + (loop + 1) + `" name="correct_answers[]">
+                                    <label class="form-check-label" for="correct_answer_` + (loop + 1) + `">
+                                        Is Correct Answer
+                                    </label>
+                                    @error('correct_answers.*')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <a href="#" class="text-danger rounded px-1 text-small remove-answer-field"><i class="bi bi-x-circle"></i>Remove</a>
+                            </div>`);
+                count++;
+            }
+        });
+
+        $(answers).on('click', '.remove-answer-field', function(e) {
+            e.preventDefault();
+            console.log("REMOVE");
+            $(this).parent('div:last-child').remove();
+            count--;
+        });
+
+    });
+</script>
+<!--Add more answers ends-->

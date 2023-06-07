@@ -52,7 +52,7 @@
                         <?php } ?>
                     </div>
                     <div class="mb-3">
-                        <a href="#" class="btn btn-sm btn-outline-success">Add more answers (Max:7)</a>
+                        <button type="button" class="btn btn-sm btn-outline-success add-new-answer-field"><i class="bi bi-plus-circle"></i> Add more answers (Max:7)</button>
                     </div>
                 </x-form.form>
             </div>
