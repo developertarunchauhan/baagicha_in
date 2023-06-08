@@ -19,7 +19,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
 
-        $role_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        $role_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
         $password = Hash::make('user_@123');
         return [
             'name' => fake()->name(),
@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'handle' => Str::slug(fake()->name(), "-") . '-' . strtolower(Str::random(5)),
             'password' => $password,
             'remember_token' => Str::random(10),
-            'role_id' => $role_list[rand(0, 9)],
+            'role_id' => $role_list[rand(0, 10)],
         ];
     }
 

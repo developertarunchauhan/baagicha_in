@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->role_id === 11) {
+            return redirect(route('quiz.index'));
+        }
         return view('admin.home.index');
     }
 }

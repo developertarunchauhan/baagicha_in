@@ -64,6 +64,11 @@ class RoleSeeder extends Seeder
                 'title' => 'Registered User',
                 'slug' => 'registered-user',
                 'desription' => ' Users who have created an account on the e-commerce platform. They can log in, manage their profile, view order history, and access personalized features.'
+            ],
+            [
+                'title' => 'Students',
+                'slug' => 'students',
+                'desription' => ' Users who have created an account on the platform and are eligible to give exams.'
             ]
         ];
         DB::table('roles')->insert($role_list);

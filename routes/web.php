@@ -14,6 +14,8 @@ use App\Http\Controllers\VarietyController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,41 +143,50 @@ Route::middleware(['auth', 'verified'])->group(
 
         /**
          * 
-         * QUIZ CONTROLLER
+         * Exam Manager
          * 
          */
 
         /**
          * Exam Resource Controller
          */
-        Route::resource('exam', ExamController::class)->middleware('RoleUserAccess');
+        Route::resource('exam', ExamController::class)->middleware('ExamAccess');
         Route::group(['prefix' => 'exam'], function () {
             Route::get('/trashed/{action}', [ExamController::class, 'trashed'])->name('exam.trashed');
             Route::get('/restore/{exam}', [ExamController::class, 'restore'])->withTrashed()->name('exam.restore');
             Route::delete('/forceDelete/{exam}', [ExamController::class, 'forceDelete'])->withTrashed()->name('exam.forceDelete');
-        })->middleware('RoleUserAccess');
+            Route::get('/assign/{exam}', [ExamController::class, 'assign'])->name('exam.assign');
+            Route::post('/assignexam', [ExamController::class, 'assignexam'])->name('exam.assignexam');
+        })->middleware('ExamAccess');
 
         /**
          * Question Resource Controller
          */
-        Route::resource('question', QuestionController::class)->middleware('RoleUserAccess');
+        Route::resource('question', QuestionController::class)->middleware('ExamAccess');
         Route::group(['prefix' => 'question'], function () {
             Route::get('/trashed/{action}', [QuestionController::class, 'trashed'])->name('question.trashed');
             Route::get('/restore/{question}', [QuestionController::class, 'restore'])->withTrashed()->name('question.restore');
             Route::get('/status/{question}', [QuestionController::class, 'status'])->withTrashed()->name('question.status');
             Route::delete('/forceDelete/{question}', [QuestionController::class, 'forceDelete'])->withTrashed()->name('question.forceDelete');
             Route::get('/add_question/{exam}', [QuestionController::class, 'add_question'])->name('question.add_question');
-        })->middleware('RoleUserAccess');
+        })->middleware('ExamAccess');
 
         /**
          * Answer Resource Controller
          */
-        Route::resource('answer', AnswerController::class)->middleware('RoleUserAccess');
+        Route::resource('answer', AnswerController::class)->middleware('ExamAccess');
         Route::group(['prefix' => 'answer'], function () {
             Route::get('/trashed/{action}', [AnswerController::class, 'trashed'])->name('answer.trashed');
             Route::get('/restore/{answer}', [AnswerController::class, 'restore'])->withTrashed()->name('answer.restore');
             Route::delete('/forceDelete/{answer}', [AnswerController::class, 'forceDelete'])->withTrashed()->name('answer.forceDelete');
-        })->middleware('RoleUserAccess');
+        })->middleware('ExamAccess');
+
+        /**
+         * Exam Front end controller
+         */
+        Route::resource('quiz', QuizController::class);
+        Route::get('quiz/take_exam/{exam}', [QuizController::class, 'takeQuiz'])->name('quiz.take_quiz');
+        Route::post('quiz/submit_exam', [QuizController::class, 'submitExam'])->name('quiz.submit_exam');
     }
 );
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('exam_id')->constrained('exams')->onDelete('restrict');
             $table->foreignId('question_id')->constrained('questions')->onDelete('restrict');
             $table->foreignId('answer_id')->constrained('answers')->onDelete('restrict');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

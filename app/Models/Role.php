@@ -62,7 +62,8 @@ class Role extends Model
             7 => 'bg-secondary',
             8 => 'bg-dark',
             9 => 'bg-warning',
-            10 => 'bg-info'
+            10 => 'bg-info',
+            11 => 'bg-success'
         ];
         return $color[$this->id];
     }

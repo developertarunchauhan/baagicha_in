@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'RoleUserAccess' => \App\Http\Middleware\RoleUserAccess::class,
         'BlogAccess' => \App\Http\Middleware\BlogAccess::class,
         'CategoryAccess' => \App\Http\Middleware\CategoryAccess::class,
+        'ExamAccess' => \App\Http\Middleware\ExamAccess::class,
     ];
 }

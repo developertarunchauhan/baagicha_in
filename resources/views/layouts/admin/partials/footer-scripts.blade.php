@@ -126,7 +126,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                                <a href="#" class="text-danger rounded px-1 text-small remove-answer-field"><i class="bi bi-x-circle"></i>Remove</a>
+                                <a href="#" class="text-danger rounded px-1 text-small remove-answer-field"><small><i class="bi bi-x-circle"></i> Remove</small></a>
                             </div>`);
                 count++;
             }
