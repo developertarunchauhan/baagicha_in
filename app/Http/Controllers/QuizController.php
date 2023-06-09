@@ -119,10 +119,10 @@ class QuizController extends Controller
     public function viewResult($exam_id)
     {
         $user_id = auth()->user()->id;
-        $results = Result::where('exam_id', $exam_id)->where('user_id', $user_id)->get()->groupBy('question_id');
-        // foreach ($results as $question => $value) {
+        $results = Result::where('exam_id', $exam_id)->where('user_id', $user_id)->get();
         //     echo $question . "--" . $value . "<br>";
         // }
+        //return $results;
         return view('front.quiz.result', compact('results'));
     }
 }

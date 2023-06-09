@@ -37,14 +37,19 @@
     <div class="container mt-4">
         <div class="row d-flex justify-content-center border rounded p-2">
             <div class="col-sm-12">
-                @foreach($results as $key => $result)
-                {{$result[0]->question->question}} <br>
-                @foreach($result[0]->question->answers as $answer)
-                {{$loop->iteration}}. {{$answer->answer}} <br>
-                @endforeach
-                <hr>
-                {{$result[0]->answer->answer}}
-                <hr>
+                @foreach($results as $result)
+                <div class="card px-2 mb-2">
+                    <div class="card-body">
+                        <span class="fw-bold">{{$loop->iteration}}. {{$result->question->question}}</span>
+                        <div class="ans mt-3">
+                            <span class="fw-bold">Answers</span><br>
+                            @foreach($result->question->answers as $answer)
+                            <input type="checkbox" class="" name="answers_{{$loop->iteration}}" id="answer_{{$loop->iteration}}" value="{{$answer->id}}" @if($answer->is_correct) checked @endif>
+                            {{$loop->iteration}}. {{$answer->answer}} <br>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </div>
         </div>
