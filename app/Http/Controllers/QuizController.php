@@ -99,14 +99,19 @@ class QuizController extends Controller
         $result = '';
         //return $request;
         foreach ($request->answers as $question_id => $ans) {
-            foreach ($ans as $index => $answer_id) {
-                $result = Result::create([
-                    'user_id' => $user_id,
-                    'exam_id' => $exam_id,
-                    'question_id' => $question_id,
-                    'answer_id' => $answer_id
-                ]);
-            }
+
+            $result = Result::updateOrCreate(
+                ['user_id' => $user_id, 'exam_id' => $exam_id, 'question_id' => $question_id],
+                ['answers' => json_encode($ans)]
+            );
+            // foreach ($ans as $index => $answer_id) {
+            //     $result = Result::create([
+            //         'user_id' => $user_id,
+            //         'exam_id' => $exam_id,
+            //         'question_id' => $question_id,
+            //         'answer_id' => $answer_id
+            //     ]);
+            // }
         }
         return $result;
     }

@@ -14,7 +14,7 @@ class Result extends Model
         'user_id',
         'exam_id',
         'question_id',
-        'answer_id'
+        'answers'
     ];
 
     /**

@@ -126,6 +126,15 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'role_id' => 10
         ]);
+        DB::table('users')->insert([
+            'name' => 'Student Chauhan',
+            'handle' => 'student-chauhan',
+            'email' => 'student@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('student@123'),
+            'remember_token' => Str::random(10),
+            'role_id' => 11
+        ]);
 
         /**
          * Common users / visitors
