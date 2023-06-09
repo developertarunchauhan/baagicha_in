@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('content')
-<div class="row justify-content-center">
+<!-- <div class="row justify-content-center">
     <div class="col-xl-3 col-md-6 mb-3 animate__animated animate__bounce">
         <div class="card border border-top-0 border-end-0 border-bottom-0 border-primary border-5 shadow h-100 py-2">
             <div class="card-body">
@@ -78,12 +78,12 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="row d-flex justify-content-center">
     <div class="col-sm-12">
         <div class="card shadow">
             <div class="card-header">
-                Exams Assigned to you {{Auth()->user()->id}}
+                Exams Assigned to you
             </div>
             <div class="card-body">
                 @if($isExamAssignedToUser)
@@ -96,7 +96,7 @@
                     @if(!in_array($exam->id, $completedExamsByUser))
                     <a href="{{route('quiz.take_quiz',$exam)}}" class="btn btn-outline-success btn-sm">Take Exam</a>
                     @else
-                    <a href="#" class="btn btn-outline-info btn-sm">Exam Completed</a>
+                    <a href="{{route('quiz.view_result',$exam->id)}}" class="btn btn-outline-info btn-sm">View Result</a>
                     @endif
                 </div>
                 @endforeach

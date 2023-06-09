@@ -28,7 +28,8 @@ class QuizController extends Controller
 
         // checking if atleast 1 exam is assigned to logged in user.
 
-        $isExamAssignedToUser = DB::table('exam_user')->where('id', $user_id)->exists();
+        $isExamAssignedToUser = DB::table('exam_user')->where('user_id', $user_id)->exists();
+
 
         // this is confusing
         $completedExamsByUser = Result::where('user_id', $user_id)->whereIn('exam_id', (new Exam)->completedExam())->pluck('exam_id')->toArray();
@@ -92,9 +93,31 @@ class QuizController extends Controller
 
     public function submitExam(Request $request)
     {
-        foreach ($request->answers as $k => $a) {
-            p($k);
-            p($a);
+
+        $user_id = auth()->user()->id;
+        $exam_id = $request->exam_id;
+        $result = '';
+        //return $request;
+        foreach ($request->answers as $question_id => $ans) {
+            foreach ($ans as $index => $answer_id) {
+                $result = Result::create([
+                    'user_id' => $user_id,
+                    'exam_id' => $exam_id,
+                    'question_id' => $question_id,
+                    'answer_id' => $answer_id
+                ]);
+            }
         }
+        return $result;
+    }
+
+    public function viewResult($exam_id)
+    {
+        $user_id = auth()->user()->id;
+        $results = Result::where('exam_id', $exam_id)->where('user_id', $user_id)->get()->groupBy('question_id');
+        // foreach ($results as $question => $value) {
+        //     echo $question . "--" . $value . "<br>";
+        // }
+        return view('front.quiz.result', compact('results'));
     }
 }

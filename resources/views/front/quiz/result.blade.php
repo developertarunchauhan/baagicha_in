@@ -37,26 +37,15 @@
     <div class="container mt-4">
         <div class="row d-flex justify-content-center border rounded p-2">
             <div class="col-sm-12">
-                <h3 class="text-center">{{$exam->title}}</h3>
-                <form action="{{route('quiz.submit_exam')}}" method="post">
-                    <input type="hidden" name="exam_id" value="{{$exam->id}}" />
-                    @csrf
-                    @foreach($exam->questions as $question)
-                    <div class="card px-2 mb-2">
-                        <div class="card-body">
-                            <span class="fw-bold">{{$loop->iteration}}. {{$question->question}}</span>
-                            <div class="ans mt-3">
-                                <span class="fw-bold">Answers</span><br>
-                                @foreach($question->answers as $answer)
-                                <input type="checkbox" class="" name="answers[{{$question->id}}][]" id="answer_{{$loop->iteration}}" value="{{$answer->id}}">
-                                {{$loop->iteration}}. {{$answer->answer}} <br>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    <button type="submit" class="btn btn-primary">Submit Exam</button>
-                </form>
+                @foreach($results as $key => $result)
+                {{$result[0]->question->question}} <br>
+                @foreach($result[0]->question->answers as $answer)
+                {{$loop->iteration}}. {{$answer->answer}} <br>
+                @endforeach
+                <hr>
+                {{$result[0]->answer->answer}}
+                <hr>
+                @endforeach
             </div>
         </div>
     </div>

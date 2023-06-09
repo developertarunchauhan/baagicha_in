@@ -44,7 +44,7 @@ class Exam extends Model
         $user_id = auth()->user()->id;
         $completedExams = Result::where('user_id', $user_id)->get();
         foreach ($completedExams as $completedExam) {
-            array_push($completedExamList, $completedExam->exam_id);
+            array_push($completedExamIdList, $completedExam->exam_id);
         }
         return $completedExamIdList;
     }

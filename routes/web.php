@@ -187,6 +187,7 @@ Route::middleware(['auth', 'verified'])->group(
         Route::resource('quiz', QuizController::class);
         Route::get('quiz/take_exam/{exam}', [QuizController::class, 'takeQuiz'])->name('quiz.take_quiz');
         Route::post('quiz/submit_exam', [QuizController::class, 'submitExam'])->name('quiz.submit_exam');
+        Route::get('quiz/view_result/{exam_id}', [QuizController::class, 'viewResult'])->name('quiz.view_result');
     }
 );
 
